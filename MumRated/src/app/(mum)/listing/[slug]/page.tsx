@@ -3,8 +3,12 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { getListingBySlug, computeStarDistribution, type ReviewSort } from "@/lib/listings";
+import { auth } from "@/auth";
+import { db } from "@/lib/db";
 import StarRating from "@/components/ui/StarRating";
 import WhatsAppShare from "@/components/ui/WhatsAppShare";
+import HelpfulButton from "@/components/ui/HelpfulButton";
+import ReportModal from "@/components/ui/ReportModal";
 
 interface Props {
   params: { slug: string };
@@ -98,8 +102,23 @@ export default async function ListingPage({ params, searchParams }: Props) {
     "most-helpful"
   ) as ReviewSort;
 
-  const listing = await getListingBySlug(params.slug, sort);
+  const [listing, session] = await Promise.all([
+    getListingBySlug(params.slug, sort),
+    auth(),
+  ]);
   if (!listing) notFound();
+
+  // Fetch which reviews the current user has already voted helpful on
+  const userId = session?.user?.id ?? null;
+  const isAuthenticated = !!userId;
+  const votedIds = new Set<string>();
+  if (userId) {
+    const votes = await db.helpfulVote.findMany({
+      where: { userId, reviewId: { in: listing.reviews.map((r) => r.id) } },
+      select: { reviewId: true },
+    });
+    votes.forEach((v) => votedIds.add(v.reviewId));
+  }
 
   const { name, type, brandOrProvider, heroImage, locationText, priceRangeNGN, description, claimStatus, category, stats, reviews } = listing;
 
@@ -448,19 +467,18 @@ export default async function ListingPage({ params, searchParams }: Props) {
                         type,
                       )}
 
-                    {/* Helpful count + report */}
-                    <div className="flex items-center gap-4 pt-1 text-xs text-muted border-t border-border">
-                      <span>
-                        {review.helpfulCount}{" "}
-                        {review.helpfulCount === 1 ? "mum found this helpful" : "mums found this helpful"}
-                      </span>
-                      {/* Helpful button — built in Prompt 5 */}
-                      <Link
-                        href={`/report?reviewId=${review.id}`}
-                        className="hover:text-dark transition"
-                      >
-                        Report
-                      </Link>
+                    {/* Helpful voting + report */}
+                    <div className="flex items-center justify-between pt-1 border-t border-border">
+                      <HelpfulButton
+                        reviewId={review.id}
+                        initialCount={review.helpfulCount}
+                        hasVoted={votedIds.has(review.id)}
+                        isAuthenticated={isAuthenticated}
+                      />
+                      <ReportModal
+                        reviewId={review.id}
+                        isAuthenticated={isAuthenticated}
+                      />
                     </div>
                   </article>
                 );

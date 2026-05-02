@@ -1,0 +1,394 @@
+// MumRated! — Prisma Schema (v5)
+// Trust boundary: search ranking is driven by review data only.
+// See SCHEMA_NOTES.md for the full design rationale.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// ENUMS
+// ══════════════════════════════════════════════════════════════════════════
+
+enum UserRole {
+  MUM
+  STAFF
+  ADMIN
+}
+
+/// How old the child was at the time of review / profile creation.
+/// Stored as a band rather than exact DOB to preserve mum privacy.
+enum ChildAgeBand {
+  NEWBORN     // 0–3 months
+  INFANT      // 3–12 months
+  TODDLER     // 1–3 years
+  PRESCHOOL   // 3–5 years
+  SCHOOL_AGE  // 5+ years
+}
+
+enum CategoryType {
+  PRODUCT
+  SERVICE
+}
+
+enum ListingType {
+  PRODUCT
+  SERVICE
+}
+
+/// Lifecycle of a provider claim on a listing.
+/// UNCLAIMED: listing exists; no provider has applied.
+/// PENDING:   provider applied; MumRated team reviewing identity.
+/// CLAIMED:   identity verified; listing officially managed by provider.
+enum ClaimStatus {
+  UNCLAIMED
+  PENDING
+  CLAIMED
+}
+
+/// What the provider pays for.
+/// NONE:       unclaimed / free listing (mums can still review it).
+/// CLAIM:      basic claim — respond to reviews, update profile.
+/// CLAIM_PLUS: everything in CLAIM + priority moderation SLA.
+/// CLAIM_PRO:  everything in CLAIM_PLUS + API access, analytics export.
+///
+/// CRITICAL: this enum MUST NOT be used to influence Listing sort order,
+/// search ranking, or visibility in any query. See SCHEMA_NOTES.md.
+enum SubscriptionTier {
+  NONE
+  CLAIM
+  CLAIM_PLUS
+  CLAIM_PRO
+}
+
+enum ReviewStatus {
+  PUBLISHED
+  FLAGGED   // reported; still visible while under review
+  HIDDEN    // temporarily hidden by mod; reversible
+  REMOVED   // permanently removed; irreversible
+}
+
+enum ReportStatus {
+  OPEN
+  RESOLVED
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// USER — the mum (and staff/admin accounts share this table via `role`)
+// ══════════════════════════════════════════════════════════════════════════
+
+model User {
+  id            String        @id @default(cuid())
+  email         String        @unique
+  emailVerified DateTime?
+  /// Synced from OAuth provider (Google name). Used by Auth.js adapter.
+  name          String?
+  /// Mum's chosen display name; nullable until first profile save.
+  displayName   String?
+  /// Cloudinary URL for profile photo. Auth.js `image` field mapped here.
+  image         String?
+  photo         String?
+  childAgeBand  ChildAgeBand?
+  /// Nullable free-text string — not an enum so mums can enter any city name.
+  city          String?
+  country       String        @default("NG")
+  role          UserRole      @default(MUM)
+  isVerified    Boolean       @default(false)
+  createdAt     DateTime      @default(now())
+
+  accounts        Account[]
+  sessions        Session[]
+  reviews         Review[]
+  helpfulVotes    HelpfulVote[]
+  reports         Report[]
+  createdListings Listing[]     @relation("ListingCreatedBy")
+  adminActions    AdminAction[] @relation("AdminActionBy")
+
+  @@index([email])
+  @@index([role])
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// AUTH.JS — Required models for @auth/prisma-adapter
+// ══════════════════════════════════════════════════════════════════════════
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// CATEGORY — product or service grouping (supports one level of nesting)
+// ══════════════════════════════════════════════════════════════════════════
+
+model Category {
+  id       String       @id @default(cuid())
+  name     String
+  slug     String       @unique
+  type     CategoryType
+  parentId String?
+  parent   Category?    @relation("CategoryTree", fields: [parentId], references: [id])
+  children Category[]   @relation("CategoryTree")
+
+  listings Listing[]
+
+  @@index([slug])
+  @@index([type])
+  @@index([parentId])
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// LISTING — a product or service that mums can review
+//
+// ╔═════════════════════════════════════════════════════════════════════╗
+// ║  TRUST BOUNDARY — read before modifying this model                 ║
+// ║                                                                     ║
+// ║  This model deliberately has NO field that affects search ranking,  ║
+// ║  browse ordering, or visibility based on commercial status.         ║
+// ║                                                                     ║
+// ║  Absent by design — any PR adding these fields MUST be rejected:   ║
+// ║    ✗  featured       Boolean                                        ║
+// ║    ✗  promoted       Boolean                                        ║
+// ║    ✗  boosted        Boolean                                        ║
+// ║    ✗  rankScore      Float                                          ║
+// ║    ✗  promotedUntil  DateTime                                       ║
+// ║    ✗  paidPlacement  Int                                            ║
+// ║                                                                     ║
+// ║  The only ranking data lives in ListingStats, derived solely from   ║
+// ║  Review records. Provider.subscriptionTier is in a separate table   ║
+// ║  and MUST NOT be joined into any ranking or filtering query.        ║
+// ║                                                                     ║
+// ║  See SCHEMA_NOTES.md for full rationale.                           ║
+// ╚═════════════════════════════════════════════════════════════════════╝
+// ══════════════════════════════════════════════════════════════════════════
+
+model Listing {
+  id              String      @id @default(cuid())
+  type            ListingType
+  name            String
+  slug            String      @unique
+  description     String?
+  brandOrProvider String?
+  categoryId      String
+  category        Category    @relation(fields: [categoryId], references: [id])
+  heroImage       String?
+  /// For services: "Lekki Phase 1, Lagos". For products: "Jumia · Shoprite".
+  locationText    String?
+  /// Human-readable display string e.g. "₦5,000 – ₦15,000".
+  priceRangeNGN   String?
+  /// Structured floor/ceiling for filter queries (integers in NGN).
+  priceRangeMin   Int?
+  priceRangeMax   Int?
+  currency        String      @default("NGN")
+  /// Null when listing was created by the system (bulk import).
+  createdById     String?
+  createdBy       User?       @relation("ListingCreatedBy", fields: [createdById], references: [id])
+  /// Null when UNCLAIMED. FK to Provider — NOT to subscription tier.
+  claimedByProviderId String?
+  claimedByProvider   Provider? @relation(fields: [claimedByProviderId], references: [id])
+  claimStatus         ClaimStatus @default(UNCLAIMED)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  reviews Review[]
+  stats   ListingStats?
+
+  @@index([categoryId])
+  @@index([type])
+  @@index([claimStatus])
+  @@index([slug])
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// LISTING STATS — the single source of ranking truth
+//
+// Updated ONLY when:
+//   (a) A Review transitions into PUBLISHED status
+//   (b) A Review transitions out of PUBLISHED (→ HIDDEN or REMOVED)
+//
+// MUST NOT be updated in response to:
+//   ✗  A Provider paying for a subscription
+//   ✗  A Provider claiming a listing
+//   ✗  Any admin action that is not a review status change
+//
+// Canonical ranking query:
+//   ORDER BY avgRating DESC, reviewCount DESC
+// ══════════════════════════════════════════════════════════════════════════
+
+model ListingStats {
+  id           String    @id @default(cuid())
+  listingId    String    @unique
+  listing      Listing   @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  avgRating    Float     @default(0)
+  reviewCount  Int       @default(0)
+  lastReviewAt DateTime?
+  updatedAt    DateTime  @updatedAt
+
+  /// Composite index supports the canonical ranking query efficiently.
+  @@index([avgRating(sort: Desc), reviewCount(sort: Desc)])
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// PROVIDER — a business that has claimed (or is claiming) listings
+//
+// subscriptionTier governs ONLY:
+//   ✓  Whether the provider can respond to reviews
+//   ✓  Whether the "Claimed" / "Verified" badge is displayed
+//   ✓  How many listings the provider can manage simultaneously
+//
+// subscriptionTier MUST NOT govern:
+//   ✗  Position in search results
+//   ✗  Whether the listing appears at all
+//   ✗  Any "boost" in category browse pages
+// ══════════════════════════════════════════════════════════════════════════
+
+model Provider {
+  id               String           @id @default(cuid())
+  businessName     String
+  verifiedIdentity Boolean          @default(false)
+  subscriptionTier SubscriptionTier @default(NONE)
+  contactEmail     String
+  contactPhone     String?
+  websiteUrl       String?
+  createdAt        DateTime         @default(now())
+
+  claimedListings Listing[]
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// REVIEW — the core unit of trust
+// ══════════════════════════════════════════════════════════════════════════
+
+model Review {
+  id                   String        @id @default(cuid())
+  listingId            String
+  listing              Listing       @relation(fields: [listingId], references: [id])
+  userId               String
+  user                 User          @relation(fields: [userId], references: [id])
+  /// 1–5 integer; enforced at application layer.
+  rating               Int
+  /// The written review body — required, min 10 chars enforced at app layer.
+  text                 String
+  /// Flexible per-category prompts stored as JSON.
+  /// Products:  { wouldBuyAgain, purchasedFrom, ageWhenUsed, qualityRating }
+  /// Services:  { monthsUsed, wouldRecommend, staffRating, facilityRating, waitTime }
+  structuredAnswers    Json          @default("{}")
+  photoUrls            String[]      @default([])
+  childAgeBandAtReview ChildAgeBand?
+  cityAtReview         String?
+  isAnonymous          Boolean       @default(false)
+  status               ReviewStatus  @default(PUBLISHED)
+  /// Denormalised counter synced from HelpfulVote; updated atomically on vote.
+  helpfulCount         Int           @default(0)
+  createdAt            DateTime      @default(now())
+
+  helpfulVotes HelpfulVote[]
+  reports      Report[]
+
+  @@index([listingId, status])
+  @@index([userId])
+  @@index([createdAt(sort: Desc)])
+  @@index([rating])
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// HELPFUL VOTE — one vote per (review × user); structural guarantee
+// ══════════════════════════════════════════════════════════════════════════
+
+model HelpfulVote {
+  id        String   @id @default(cuid())
+  reviewId  String
+  review    Review   @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([reviewId, userId])
+  @@index([reviewId])
+  @@index([userId])
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// REPORT — mum flags a review for moderation
+// ══════════════════════════════════════════════════════════════════════════
+
+model Report {
+  id         String       @id @default(cuid())
+  reviewId   String
+  review     Review       @relation(fields: [reviewId], references: [id])
+  reportedBy String
+  reporter   User         @relation(fields: [reportedBy], references: [id])
+  reason     String
+  status     ReportStatus @default(OPEN)
+  createdAt  DateTime     @default(now())
+
+  @@index([status])
+  @@index([reviewId])
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// ADMIN ACTION — immutable audit log (rows are never deleted)
+//
+// Every moderation decision creates a row here. This log is permanent.
+// actionType values: HIDE_REVIEW | SHOW_REVIEW | REMOVE_REVIEW |
+//   APPROVE_CLAIM | REJECT_CLAIM | BAN_USER | UNBAN_USER |
+//   MARK_PROVIDER_VERIFIED | UNMARK_PROVIDER_VERIFIED
+// ══════════════════════════════════════════════════════════════════════════
+
+model AdminAction {
+  id          String   @id @default(cuid())
+  adminUserId String
+  adminUser   User     @relation("AdminActionBy", fields: [adminUserId], references: [id])
+  actionType  String
+  /// e.g. "Review" | "Listing" | "User" | "Provider" | "Report"
+  targetType  String
+  targetId    String
+  reason      String?
+  /// Arbitrary JSON for action-specific context (e.g. previous status value).
+  metadata    Json     @default("{}")
+  createdAt   DateTime @default(now())
+
+  @@index([targetType, targetId])
+  @@index([adminUserId])
+  @@index([createdAt(sort: Desc)])
+}

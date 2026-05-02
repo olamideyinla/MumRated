@@ -53,6 +53,18 @@ export async function POST(req: NextRequest) {
 
   const { listingId, rating, structuredAnswers, photoUrls, childAgeBandAtReview, cityAtReview, isAnonymous, recaptchaToken } = parsed.data;
 
+  // Check if the user is suspended
+  const dbUser = await db.user.findUnique({
+    where: { id: session.user.id },
+    select: { isSuspended: true },
+  });
+  if (dbUser?.isSuspended) {
+    return NextResponse.json(
+      { error: "Your account has been suspended from submitting reviews." },
+      { status: 403 },
+    );
+  }
+
   // Confirm listing exists
   const listing = await db.listing.findUnique({
     where: { id: listingId },

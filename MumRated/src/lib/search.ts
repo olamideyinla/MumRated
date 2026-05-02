@@ -62,6 +62,7 @@ export async function searchListings(query: string, limit = 30) {
         coalesce(l."brandOrProvider", '') || ' ' ||
         coalesce(l.description, '')
       ) @@ plainto_tsquery('english', ${query})
+      AND l."status" = 'ACTIVE'
     ORDER BY rank DESC, ls."reviewCount" DESC NULLS LAST
     LIMIT ${limit}
   `;

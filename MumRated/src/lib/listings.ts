@@ -42,7 +42,11 @@ export async function getListingsByCategory(
           { stats: { avgRating: "desc" } };
 
   return db.listing.findMany({
-    where: { category: { slug: categorySlug }, stats: { isNot: null } },
+    where: {
+      category: { slug: categorySlug },
+      status: "ACTIVE",
+      stats: { isNot: null },
+    },
     orderBy: [orderBy, { stats: { reviewCount: "desc" } }],
     select: listingCardSelect,
   });
@@ -90,8 +94,8 @@ export async function getListingBySlug(
           : // most-helpful (default)
             { helpfulCount: "desc" };
 
-  return db.listing.findUnique({
-    where: { slug },
+  return db.listing.findFirst({
+    where: { slug, status: "ACTIVE" },
     include: {
       category: { select: { name: true, slug: true, type: true } },
       stats: true,
@@ -160,7 +164,7 @@ export async function getRecentReviews(limit = 12) {
 /** Top-rated listings (used on home hero section). */
 export async function getTopListings(limit = 6) {
   return db.listing.findMany({
-    where: { stats: { isNot: null } },
+    where: { status: "ACTIVE", stats: { isNot: null } },
     orderBy: [
       { stats: { avgRating: "desc" } },
       { stats: { reviewCount: "desc" } },

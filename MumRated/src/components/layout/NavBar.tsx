@@ -18,17 +18,17 @@ export default async function NavBar() {
 
         {/* Centre nav links — hidden on mobile */}
         <nav className="hidden md:flex items-center gap-6 text-sm">
-          <Link href="/baby-products" className="nav-link">
-            Baby products
+          <Link href="/how-it-works" className="nav-link">
+            How it Works
           </Link>
-          <Link href="/creches" className="nav-link">
-            Crèches
+          <Link href="/browse" className="nav-link">
+            Categories
           </Link>
-          <Link href="/paediatricians" className="nav-link">
-            Paediatricians
+          <Link href="/providers" className="nav-link">
+            Providers
           </Link>
-          <Link href="/tutors" className="nav-link">
-            Tutors
+          <Link href="/about" className="nav-link">
+            About Us
           </Link>
         </nav>
 

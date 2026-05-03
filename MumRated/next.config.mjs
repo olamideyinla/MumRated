@@ -78,25 +78,23 @@ const nextConfig = {
   },
 };
 
-export default withSentryConfig(nextConfig, {
-  // Sentry organisation and project (set in Vercel env vars)
-  org: process.env.SENTRY_ORG,
-  project: process.env.SENTRY_PROJECT,
+// Only activate the Sentry webpack plugin when credentials are present.
+// Without this guard, builds fail with "Failed to collect page data" for
+// API routes when SENTRY_AUTH_TOKEN / SENTRY_ORG / SENTRY_PROJECT are not
+// yet configured in the Vercel environment.
+const sentryConfigured =
+  process.env.SENTRY_AUTH_TOKEN &&
+  process.env.SENTRY_ORG &&
+  process.env.SENTRY_PROJECT;
 
-  // Upload source maps to Sentry on every production build.
-  // Requires SENTRY_AUTH_TOKEN — generate at sentry.io → Settings → Auth Tokens.
-  authToken: process.env.SENTRY_AUTH_TOKEN,
-
-  // Hides Sentry webpack plugin output from normal build logs
-  silent: !process.env.CI,
-
-  // Automatically instrument Next.js data fetching methods
-  autoInstrumentServerFunctions: true,
-
-  // Automatically create Sentry releases on deploy
-  // (used to correlate source maps with error events)
-  automaticVercelMonitors: true,
-
-  // Suppress the Sentry SDK telemetry banner in CLI output
-  telemetry: false,
-});
+export default sentryConfigured
+  ? withSentryConfig(nextConfig, {
+      org: process.env.SENTRY_ORG,
+      project: process.env.SENTRY_PROJECT,
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+      silent: !process.env.CI,
+      autoInstrumentServerFunctions: true,
+      automaticVercelMonitors: true,
+      telemetry: false,
+    })
+  : nextConfig;

@@ -1,0 +1,11 @@
+# Root-level .gitignore
+# This repo tracks ONLY the MumRated/ subdirectory.
+# All other directories and files in the home folder are excluded.
+
+# Exclude everything by default
+/*
+
+# Allow only the MumRated project folder and this ignore file
+!/MumRated/
+!/.gitignore
+!/README.md

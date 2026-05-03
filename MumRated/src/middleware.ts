@@ -1,8 +1,8 @@
 import { auth } from "@/auth";
 import { NextResponse } from "next/server";
 
-// Routes that require a signed-in mum
-const PROTECTED_PREFIXES = ["/review/new", "/profile"];
+// Routes that require a signed-in user (mum or provider)
+const PROTECTED_PREFIXES = ["/review/new", "/profile", "/provider/dashboard", "/provider/billing", "/provider/listing"];
 
 export default auth((req) => {
   const { pathname } = req.nextUrl;

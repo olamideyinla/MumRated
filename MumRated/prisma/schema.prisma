@@ -18,6 +18,7 @@ datasource db {
 
 enum UserRole {
   MUM
+  PROVIDER
   STAFF
   ADMIN
 }
@@ -115,6 +116,7 @@ model User {
   reports         Report[]
   createdListings Listing[]     @relation("ListingCreatedBy")
   adminActions    AdminAction[] @relation("AdminActionBy")
+  provider        Provider?     @relation("ProviderUser")
 
   @@index([email])
   @@index([role])
@@ -231,9 +233,13 @@ model Listing {
   createdBy       User?       @relation("ListingCreatedBy", fields: [createdById], references: [id])
   /// Null when UNCLAIMED. FK to Provider — NOT to subscription tier.
   claimedByProviderId String?
-  claimedByProvider   Provider? @relation(fields: [claimedByProviderId], references: [id])
+  claimedByProvider   Provider?     @relation(fields: [claimedByProviderId], references: [id])
   claimStatus         ClaimStatus   @default(UNCLAIMED)
   status              ListingStatus @default(ACTIVE)
+  /// Provider-editable: opening hours free-text e.g. "Mon–Fri 8am–6pm"
+  openingHours        String?
+  /// Provider-editable: extra photo gallery URLs (up to 5)
+  galleryImages       String[]      @default([])
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
 
@@ -292,6 +298,9 @@ model ListingStats {
 
 model Provider {
   id               String           @id @default(cuid())
+  /// The User account that owns this provider profile.
+  userId           String?          @unique
+  user             User?            @relation("ProviderUser", fields: [userId], references: [id])
   businessName     String
   verifiedIdentity Boolean          @default(false)
   subscriptionTier SubscriptionTier @default(NONE)
@@ -328,6 +337,11 @@ model Review {
   status               ReviewStatus  @default(PUBLISHED)
   /// Denormalised counter synced from HelpfulVote; updated atomically on vote.
   helpfulCount         Int           @default(0)
+  /// Provider reply — editable only by the verified provider who claimed this listing.
+  /// Displayed BELOW the review with a "Provider response" label.
+  /// Providers CANNOT edit or hide reviews — that is admin-only.
+  providerReply        String?       @db.Text
+  providerReplyAt      DateTime?
   createdAt            DateTime      @default(now())
 
   helpfulVotes HelpfulVote[]

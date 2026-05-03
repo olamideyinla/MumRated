@@ -7,6 +7,7 @@ import { db } from "./db";
  * partial words and common Nigerian English without configuration).
  *
  * CRITICAL: Sort order uses ts_rank (relevance) only — not subscription status.
+ * Subscription status MUST NOT influence ranking — see business concept section 7.4.
  */
 export async function searchListings(query: string, limit = 30) {
   if (!query.trim()) return [];

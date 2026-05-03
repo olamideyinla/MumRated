@@ -222,10 +222,10 @@ export default async function ListingPage({ params, searchParams }: Props) {
                   {claimStatus === "CLAIMED" && (
                     <span
                       className="rounded-pill border border-verified/40 bg-verified/10 px-2 py-0.5 text-xs font-semibold text-verified cursor-help"
-                      title="Identity verified — this is not an endorsement"
+                      title="Identity verified — not an endorsement. Rankings are determined by mum reviews only."
                       tabIndex={0}
                     >
-                      ✓ Claimed
+                      ✓ Verified
                     </span>
                   )}
                 </div>
@@ -480,6 +480,23 @@ export default async function ListingPage({ params, searchParams }: Props) {
                         isAuthenticated={isAuthenticated}
                       />
                     </div>
+
+                    {/* Provider reply — shown below the review, never above */}
+                    {review.providerReply && (
+                      <div className="mt-1 rounded-lg bg-bgLight border border-border px-4 py-3">
+                        <p className="text-xs font-semibold text-crimson mb-1">
+                          Provider response
+                          {review.providerReplyAt && (
+                            <span className="font-normal text-muted ml-1">
+                              · {formatDate(review.providerReplyAt)}
+                            </span>
+                          )}
+                        </p>
+                        <p className="text-sm text-dark leading-relaxed">
+                          {review.providerReply}
+                        </p>
+                      </div>
+                    )}
                   </article>
                 );
               })}

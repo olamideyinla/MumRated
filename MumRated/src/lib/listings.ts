@@ -28,6 +28,8 @@ export type SortOption = "highest-rated" | "most-reviewed" | "most-recent";
 /**
  * Fetch all listings in a category, sorted by review data only.
  * CRITICAL: no subscription status influences sort order.
+ *
+ * Subscription status MUST NOT influence ranking — see business concept section 7.4.
  */
 export async function getListingsByCategory(
   categorySlug: string,
@@ -112,6 +114,7 @@ export async function getListingBySlug(
             },
           },
         },
+        // providerReply and providerReplyAt are selected via the default include
       },
     },
   });
@@ -161,7 +164,10 @@ export async function getRecentReviews(limit = 12) {
   });
 }
 
-/** Top-rated listings (used on home hero section). */
+/**
+ * Top-rated listings (used on home hero section).
+ * Subscription status MUST NOT influence ranking — see business concept section 7.4.
+ */
 export async function getTopListings(limit = 6) {
   return db.listing.findMany({
     where: { status: "ACTIVE", stats: { isNot: null } },

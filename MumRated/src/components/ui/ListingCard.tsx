@@ -35,6 +35,7 @@ export default function ListingCard({ listing }: Props) {
             src={heroImage}
             alt={name}
             fill
+            loading="lazy"
             sizes="(max-width: 600px) 100vw, (max-width: 860px) 50vw, 33vw"
             className="object-cover group-hover:scale-105 transition-transform duration-300"
           />
@@ -45,10 +46,13 @@ export default function ListingCard({ listing }: Props) {
             </span>
           </div>
         )}
-        {/* Claimed badge */}
+        {/* Verified badge — identity verified, not an endorsement */}
         {claimStatus === "CLAIMED" && (
-          <span className="absolute top-2 right-2 rounded-pill bg-verified px-2 py-0.5 text-[10px] font-bold text-white">
-            Claimed
+          <span
+            className="absolute top-2 right-2 rounded-pill bg-verified px-2 py-0.5 text-[10px] font-bold text-white"
+            title="Identity verified — not an endorsement"
+          >
+            ✓ Verified
           </span>
         )}
       </div>

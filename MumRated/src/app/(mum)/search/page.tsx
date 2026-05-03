@@ -28,13 +28,18 @@ export default async function SearchPage({ searchParams }: Props) {
   return (
     <div className="container py-10">
       {/* Search form */}
-      <form action="/search" method="GET" className="mb-8 flex max-w-xl gap-2">
+      <form role="search" action="/search" method="GET" className="mb-8 flex max-w-xl gap-2">
+        <label htmlFor="search-input" className="sr-only">
+          Search products and services
+        </label>
         <input
+          id="search-input"
           name="q"
           type="search"
           defaultValue={q}
           placeholder="Search nappies, crèches, paediatricians…"
           autoFocus
+          aria-label="Search products and services reviewed by Nigerian mums"
           className="flex-1 rounded-input border border-border bg-card px-4 py-2.5 text-sm text-dark placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-crimson/40 focus:border-crimson"
         />
         <button type="submit" className="btn-primary px-5 py-2.5 text-sm">

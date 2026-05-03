@@ -3,8 +3,15 @@ import type { Metadata } from "next";
 import { getAllCategories } from "@/lib/listings";
 
 export const metadata: Metadata = {
-  title: "Browse — MumRated!",
-  description: "Browse all product and service categories reviewed by Nigerian mums.",
+  title: "Browse all categories — Best baby products & services in Nigeria | MumRated!",
+  description:
+    "Browse every category on MumRated — nappies, crèches, paediatricians, baby food, photographers and more. Honest reviews from Nigerian mums.",
+  openGraph: {
+    title: "Browse all categories — MumRated!",
+    description:
+      "Nappies, crèches, paediatricians, baby food and more — all rated by Nigerian mums.",
+    type: "website",
+  },
 };
 
 export const revalidate = 3600;

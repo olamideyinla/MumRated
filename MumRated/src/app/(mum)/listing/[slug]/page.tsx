@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { getListingBySlug, computeStarDistribution, type ReviewSort } from "@/lib/listings";
 import { auth } from "@/auth";
 import { db } from "@/lib/db";
+import { cldOgImage } from "@/lib/cloudinary";
 import StarRating from "@/components/ui/StarRating";
 import WhatsAppShare from "@/components/ui/WhatsAppShare";
 import HelpfulButton from "@/components/ui/HelpfulButton";
@@ -38,21 +39,41 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const avg = listing.stats?.avgRating ?? 0;
   const count = listing.stats?.reviewCount ?? 0;
+
+  // Title tuned for Nigerian search intent
+  const ratingLabel = avg > 0 ? `${avg.toFixed(1)}★ · ` : "";
+  const title = `${listing.name} reviews — Nigerian mums share their experience | MumRated!`;
   const desc = count > 0
-    ? `${avg.toFixed(1)} stars · ${count} mum review${count !== 1 ? "s" : ""}. ${listing.description ?? ""}`
-    : (listing.description ?? `Read reviews of ${listing.name} from Nigerian mums.`);
+    ? `${ratingLabel}${count} honest review${count !== 1 ? "s" : ""} of ${listing.name} from Nigerian mums. ${listing.description ?? ""}`.trim()
+    : listing.description
+      ? `${listing.description} — Read Nigerian mum reviews on MumRated.`
+      : `Read Nigerian mum reviews of ${listing.name} on MumRated.`;
+
+  // Use Cloudinary 1200×630 crop for WhatsApp/Facebook/X link previews
+  const ogImageUrl = cldOgImage(listing.heroImage);
 
   return {
-    title: `${listing.name} — MumRated!`,
+    title,
     description: desc.slice(0, 160),
+    alternates: {
+      canonical: `${APP_URL}/listing/${params.slug}`,
+    },
     openGraph: {
       title: `${listing.name} — ${avg > 0 ? `${avg.toFixed(1)}★` : "Reviews"} | MumRated!`,
       description: desc.slice(0, 160),
       type: "website",
       url: `${APP_URL}/listing/${params.slug}`,
-      images: listing.heroImage
-        ? [{ url: listing.heroImage, width: 1200, height: 630, alt: listing.name }]
+      images: ogImageUrl
+        ? [{ url: ogImageUrl, width: 1200, height: 630, alt: listing.name }]
         : [],
+      siteName: "MumRated!",
+      locale: "en_NG",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${listing.name} — MumRated!`,
+      description: desc.slice(0, 160),
+      images: ogImageUrl ? [ogImageUrl] : [],
     },
   };
 }
@@ -128,6 +149,18 @@ export default async function ListingPage({ params, searchParams }: Props) {
   const listingUrl = `${APP_URL}/listing/${params.slug}`;
   const whatsappText = `Check out ${name} on MumRated! — ${reviewCount > 0 ? `${avgRating.toFixed(1)}★ from ${reviewCount} mum review${reviewCount !== 1 ? "s" : ""}` : "Be the first to review"}. ${listingUrl}`;
 
+  // BreadcrumbList structured data
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${APP_URL}/` },
+      { "@type": "ListItem", position: 2, name: "Browse", item: `${APP_URL}/browse` },
+      { "@type": "ListItem", position: 3, name: category.name, item: `${APP_URL}/category/${category.slug}` },
+      { "@type": "ListItem", position: 4, name, item: `${APP_URL}/listing/${params.slug}` },
+    ],
+  };
+
   // Schema.org JSON-LD
   const isProduct = type === "PRODUCT";
   const schemaOrg = isProduct
@@ -184,19 +217,23 @@ export default async function ListingPage({ params, searchParams }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
 
       <div className="container py-8 max-w-3xl">
         {/* Breadcrumb */}
-        <nav className="text-xs text-muted mb-6 flex items-center gap-1.5 flex-wrap">
+        <nav aria-label="Breadcrumb" className="text-xs text-muted mb-6 flex items-center gap-1.5 flex-wrap">
           <Link href="/" className="hover:text-dark">Home</Link>
-          <span>/</span>
+          <span aria-hidden="true">/</span>
           <Link href="/browse" className="hover:text-dark">Browse</Link>
-          <span>/</span>
+          <span aria-hidden="true">/</span>
           <Link href={`/category/${category.slug}`} className="hover:text-dark">
             {category.name}
           </Link>
-          <span>/</span>
-          <span className="text-dark font-medium truncate">{name}</span>
+          <span aria-hidden="true">/</span>
+          <span className="text-dark font-medium truncate" aria-current="page">{name}</span>
         </nav>
 
         {/* Hero */}

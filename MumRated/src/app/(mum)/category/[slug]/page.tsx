@@ -13,15 +13,22 @@ interface Props {
   searchParams: { sort?: string };
 }
 
+const APP_URL_CAT = process.env.NEXT_PUBLIC_APP_URL ?? "https://mumrated.com";
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const cat = await getCategoryBySlug(params.slug);
   if (!cat) return { title: "Category not found — MumRated!" };
   return {
-    title: `${cat.name} reviews — MumRated!`,
-    description: `Read honest mum reviews of ${cat.name.toLowerCase()} in Nigeria.`,
+    title: `Best ${cat.name} in Nigeria — reviewed by mums | MumRated!`,
+    description: `Read honest reviews of ${cat.name.toLowerCase()} in Nigeria, written by real mums. Find the best rated ${cat.name.toLowerCase()} on MumRated.`,
     openGraph: {
-      title: `${cat.name} — MumRated!`,
-      description: `Honest Nigerian mum reviews of ${cat.name.toLowerCase()}.`,
+      title: `Best ${cat.name} in Nigeria — MumRated!`,
+      description: `Nigerian mums share their honest reviews of ${cat.name.toLowerCase()}. See ratings, tips, and real experiences.`,
+      type: "website",
+      url: `${APP_URL_CAT}/category/${params.slug}`,
+    },
+    alternates: {
+      canonical: `${APP_URL_CAT}/category/${params.slug}`,
     },
   };
 }
@@ -45,15 +52,34 @@ export default async function CategoryPage({ params, searchParams }: Props) {
 
   const listings = await getListingsByCategory(params.slug, sort);
 
+  // BreadcrumbList structured data
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${APP_URL_CAT}/` },
+      { "@type": "ListItem", position: 2, name: "Browse", item: `${APP_URL_CAT}/browse` },
+      { "@type": "ListItem", position: 3, name: cat.name, item: `${APP_URL_CAT}/category/${params.slug}` },
+    ],
+  };
+
   return (
     <div className="container py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       {/* Breadcrumb */}
-      <nav className="text-xs text-muted mb-6 flex items-center gap-1.5">
+      <nav
+        aria-label="Breadcrumb"
+        className="text-xs text-muted mb-6 flex items-center gap-1.5"
+      >
         <Link href="/" className="hover:text-dark">Home</Link>
-        <span>/</span>
+        <span aria-hidden="true">/</span>
         <Link href="/browse" className="hover:text-dark">Browse</Link>
-        <span>/</span>
-        <span className="text-dark font-medium">{cat.name}</span>
+        <span aria-hidden="true">/</span>
+        <span className="text-dark font-medium" aria-current="page">{cat.name}</span>
       </nav>
 
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">

@@ -56,6 +56,32 @@
   }
 }
 
+/* ── Accessibility base styles ───────────────────────────────────────────── */
+@layer base {
+  /* Ensure visible focus rings for keyboard navigation (WCAG 2.4.7).
+     We use :focus-visible so mouse/touch users don't see the outline. */
+  :focus-visible {
+    outline: 2px solid #7B1818;
+    outline-offset: 2px;
+  }
+
+  /* Remove default outline only when focus-visible is not triggered */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* Reduce motion for users who prefer it (WCAG 2.3.3) */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
 /* ── Design-system component classes ────────────────────────────────────── */
 @layer components {
   /* Buttons */
@@ -64,15 +90,30 @@
     @apply hover:bg-crimson-dark;
     box-shadow: 0 4px 14px rgba(123, 24, 24, 0.267);
   }
+  .btn-primary:focus-visible {
+    outline: 2px solid #7B1818;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px rgba(123, 24, 24, 0.25);
+  }
 
   .btn-outline {
     @apply inline-block border-2 border-crimson text-crimson font-bold rounded-pill bg-transparent transition-all duration-150;
     @apply hover:bg-crimson hover:text-white;
   }
+  .btn-outline:focus-visible {
+    outline: 2px solid #7B1818;
+    outline-offset: 3px;
+  }
 
   .btn-gold {
     @apply inline-block bg-gold text-dark font-bold rounded-pill transition-colors duration-150;
     @apply hover:bg-gold-light;
+  }
+
+  /* Form error region — announced by screen readers */
+  .form-error {
+    @apply text-sm text-red-600;
+    /* role="alert" should be added in JSX for dynamic errors */
   }
 
   /* Cards */

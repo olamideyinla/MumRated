@@ -15,7 +15,7 @@ export default function MumLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <NavBar />
-      <main>{children}</main>
+      <main id="main-content">{children}</main>
     </>
   );
 }

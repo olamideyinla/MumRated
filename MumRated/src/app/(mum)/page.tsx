@@ -1,18 +1,40 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { getAllCategories, getRecentReviews, getTopListings } from "@/lib/listings";
 import ListingCard from "@/components/ui/ListingCard";
 import StarRating from "@/components/ui/StarRating";
+import { cldOptimise } from "@/lib/cloudinary";
 
 export const metadata: Metadata = {
-  title: "MumRated! — Honest reviews from Nigerian mums",
+  title: "MumRated! — Best baby products & services in Nigeria, reviewed by mums",
   description:
-    "Find and share honest reviews of baby products and family services, written by Nigerian mums for Nigerian mums.",
+    "Find the best baby products, crèches, paediatricians, and family services in Nigeria. Honest reviews written by Nigerian mums — no ads, no sponsored results.",
   openGraph: {
-    title: "MumRated! — Honest reviews from Nigerian mums",
+    title: "MumRated! — Best baby products & services in Nigeria, reviewed by mums",
     description:
-      "Find and share honest reviews of baby products and family services.",
+      "Honest reviews from Nigerian mums. Baby products, crèches, paediatricians, and more.",
     type: "website",
+  },
+};
+
+const APP_URL_HOME = process.env.NEXT_PUBLIC_APP_URL ?? "https://mumrated.com";
+
+// WebSite schema with SearchAction — enables Google's sitelinks search box
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "MumRated!",
+  url: APP_URL_HOME,
+  description:
+    "Nigeria's mum review platform. Honest reviews of baby products and family services.",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${APP_URL_HOME}/search?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
   },
 };
 
@@ -54,6 +76,12 @@ export default async function HomePage() {
 
   return (
     <>
+      {/* WebSite schema with SearchAction — enables Google sitelinks search box */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+
       {/* Hero */}
       <section className="bg-gradient-to-b from-[#5E1010] via-crimson to-[#A02020] text-white px-4 py-14 md:py-20">
         <div className="container text-center max-w-2xl">
@@ -63,8 +91,10 @@ export default async function HomePage() {
           <p className="text-white/80 text-lg mb-8 leading-relaxed">
             No ads. No sponsored results. Just honest takes from mums who&rsquo;ve been there.
           </p>
-          <form action="/search" method="GET" className="flex max-w-lg mx-auto">
+          <form role="search" action="/search" method="GET" className="flex max-w-lg mx-auto">
+            <label htmlFor="hero-search" className="sr-only">Search products and services</label>
             <input
+              id="hero-search"
               name="q"
               type="search"
               placeholder="Search nappies, crèches, paediatricians…"
@@ -159,9 +189,8 @@ export default async function HomePage() {
                   >
                     <div className="flex items-center gap-3">
                       {review.user.photo && !review.isAnonymous ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={review.user.photo}
+                        <Image
+                          src={cldOptimise(review.user.photo) ?? review.user.photo}
                           alt={name}
                           width={36}
                           height={36}

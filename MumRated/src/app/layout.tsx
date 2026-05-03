@@ -26,13 +26,15 @@ export const metadata: Metadata = {
     template: "%s | MumRated!",
   },
   description:
-    "Nigeria's #1 mum review platform. Honest, experience-based reviews on products and services — from nappies to crèches, paediatricians to baby photographers.",
+    "Honest reviews from Nigerian mums. Best baby products, crèches, paediatricians, and family services in Nigeria — rated by mums who've used them.",
   keywords: [
-    "Nigerian mums",
-    "baby products reviews",
+    "best baby products Nigeria",
     "crèche reviews Nigeria",
     "paediatrician reviews Lagos",
-    "mum community Nigeria",
+    "mum reviews Nigeria",
+    "baby products Nigeria",
+    "best crèche Lagos",
+    "nappies review Nigeria",
   ],
   authors: [{ name: "MumRated!" }],
   creator: "MumRated!",
@@ -64,7 +66,8 @@ export const viewport: Viewport = {
   themeColor: "#7B1818",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
+  // maximumScale removed — capping scale to 1 is a WCAG 1.4.4 (Resize Text)
+  // failure. Users who need to zoom for accessibility must be allowed to do so.
 };
 
 // ── Root Layout ───────────────────────────────────────────────────────────
@@ -74,8 +77,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${playfair.variable}`}>
-      <body className="font-body">{children}</body>
+    <html lang="en-NG" className={`${dmSans.variable} ${playfair.variable}`}>
+      <body className="font-body">
+        {/* Skip-to-content — first focusable element on the page.
+            Hidden visually until focused; essential for keyboard/screen-reader users. */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:rounded-lg focus:bg-crimson focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg focus:outline-none"
+        >
+          Skip to main content
+        </a>
+        {children}
+      </body>
     </html>
   );
 }

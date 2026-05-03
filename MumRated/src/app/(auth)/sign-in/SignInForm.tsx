@@ -75,7 +75,7 @@ export default function SignInForm() {
               Welcome back
             </h1>
             <p className="text-muted text-sm">
-              Real reviews from real Nigerian mums.
+              Real reviews from real mums.
             </p>
           </div>
 

@@ -19,17 +19,25 @@ const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://mumrated.com";
 export const revalidate = 3600; // regenerate at most once per hour
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [categories, listings] = await Promise.all([
-    db.category.findMany({
-      select: { slug: true },
-      orderBy: { name: "asc" },
-    }),
-    db.listing.findMany({
-      where: { status: "ACTIVE" },
-      select: { slug: true, updatedAt: true },
-      orderBy: { updatedAt: "desc" },
-    }),
-  ]);
+  let categories: { slug: string }[] = [];
+  let listings: { slug: string; updatedAt: Date }[] = [];
+
+  try {
+    [categories, listings] = await Promise.all([
+      db.category.findMany({
+        select: { slug: true },
+        orderBy: { name: "asc" },
+      }),
+      db.listing.findMany({
+        where: { status: "ACTIVE" },
+        select: { slug: true, updatedAt: true },
+        orderBy: { updatedAt: "desc" },
+      }),
+    ]);
+  } catch {
+    // DB unavailable at build time — return static routes only.
+    // The sitemap will be fully populated once the app is running (revalidate: 3600).
+  }
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {

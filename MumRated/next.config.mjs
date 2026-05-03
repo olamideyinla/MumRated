@@ -1,3 +1,12 @@
+/**
+ * next.config.mjs
+ *
+ * Sentry is wrapped around the config via withSentryConfig (see bottom).
+ * Required env vars for Sentry source-map upload (build-time only):
+ *   SENTRY_ORG, SENTRY_PROJECT, SENTRY_AUTH_TOKEN
+ */
+import { withSentryConfig } from "@sentry/nextjs";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -69,4 +78,25 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withSentryConfig(nextConfig, {
+  // Sentry organisation and project (set in Vercel env vars)
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+
+  // Upload source maps to Sentry on every production build.
+  // Requires SENTRY_AUTH_TOKEN — generate at sentry.io → Settings → Auth Tokens.
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+
+  // Hides Sentry webpack plugin output from normal build logs
+  silent: !process.env.CI,
+
+  // Automatically instrument Next.js data fetching methods
+  autoInstrumentServerFunctions: true,
+
+  // Automatically create Sentry releases on deploy
+  // (used to correlate source maps with error events)
+  automaticVercelMonitors: true,
+
+  // Suppress the Sentry SDK telemetry banner in CLI output
+  telemetry: false,
+});

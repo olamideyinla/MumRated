@@ -45,6 +45,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
+      url: `${APP_URL}/trust`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+    // /terms and /privacy have robots noindex until lawyer-reviewed.
+    // Add them here once the final versions are live.
+    {
       url: `${APP_URL}/sign-in`,
       lastModified: new Date(),
       changeFrequency: "yearly",

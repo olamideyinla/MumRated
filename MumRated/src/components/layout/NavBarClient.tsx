@@ -33,7 +33,7 @@ export default function NavBarClient({ session }: Props) {
         </Link>
         <Link
           href="/sign-in"
-          className="btn-primary py-1.5 px-4 text-sm hidden sm:inline-flex"
+          className="btn-primary py-1.5 px-4 text-sm"
         >
           Join MumRated
         </Link>

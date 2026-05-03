@@ -3,7 +3,6 @@ import Google from "next-auth/providers/google";
 import Resend from "next-auth/providers/resend";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "@/lib/db";
-import type { UserRole } from "@prisma/client";
 
 // ── Helper: derive isVerified from profile completeness ──────────────────
 function computeIsVerified(user: {
@@ -69,29 +68,32 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return true;
     },
 
-    // Expose role and isVerified in the session
+    // Expose id, role and isVerified in the session
     async session({ session, user }) {
-      if (session.user) {
-        const dbUser = await db.user.findUnique({
-          where: { id: user.id },
-          select: {
-            id: true,
-            role: true,
-            isVerified: true,
-            displayName: true,
-            photo: true,
-          },
-        });
-        if (dbUser) {
-          session.user.id = dbUser.id;
-          (session.user as typeof session.user & { role: UserRole }).role =
-            dbUser.role;
-          (
-            session.user as typeof session.user & { isVerified: boolean }
-          ).isVerified = dbUser.isVerified;
-          // Prefer our custom displayName/photo over Auth.js defaults
-          if (dbUser.displayName) session.user.name = dbUser.displayName;
-          if (dbUser.photo) session.user.image = dbUser.photo;
+      if (session.user && user?.id) {
+        // Always set id — this is the critical guard for protected pages
+        session.user.id = user.id;
+
+        try {
+          const dbUser = await db.user.findUnique({
+            where: { id: user.id },
+            select: {
+              id: true,
+              role: true,
+              isVerified: true,
+              displayName: true,
+              photo: true,
+            },
+          });
+          if (dbUser) {
+            session.user.role = dbUser.role;
+            session.user.isVerified = dbUser.isVerified;
+            // Prefer our custom displayName/photo over Auth.js defaults
+            if (dbUser.displayName) session.user.name = dbUser.displayName;
+            if (dbUser.photo) session.user.image = dbUser.photo;
+          }
+        } catch {
+          // DB enrichment failed — session still works with basic id
         }
       }
       return session;

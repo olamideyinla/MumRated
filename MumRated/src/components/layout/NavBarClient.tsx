@@ -50,8 +50,7 @@ export default function NavBarClient({ session }: Props) {
     .slice(0, 2)
     .toUpperCase();
 
-  // Safely read extended fields added in auth callback
-  const isVerified = (session.user as { isVerified?: boolean }).isVerified;
+  const isVerified = session.user.isVerified;
 
   return (
     <div className="relative" ref={menuRef}>

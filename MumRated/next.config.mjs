@@ -1,12 +1,3 @@
-/**
- * next.config.mjs
- *
- * Sentry is wrapped around the config via withSentryConfig (see bottom).
- * Required env vars for Sentry source-map upload (build-time only):
- *   SENTRY_ORG, SENTRY_PROJECT, SENTRY_AUTH_TOKEN
- */
-import { withSentryConfig } from "@sentry/nextjs";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -78,23 +69,8 @@ const nextConfig = {
   },
 };
 
-// Only activate the Sentry webpack plugin when credentials are present.
-// Without this guard, builds fail with "Failed to collect page data" for
-// API routes when SENTRY_AUTH_TOKEN / SENTRY_ORG / SENTRY_PROJECT are not
-// yet configured in the Vercel environment.
-const sentryConfigured =
-  process.env.SENTRY_AUTH_TOKEN &&
-  process.env.SENTRY_ORG &&
-  process.env.SENTRY_PROJECT;
-
-export default sentryConfigured
-  ? withSentryConfig(nextConfig, {
-      org: process.env.SENTRY_ORG,
-      project: process.env.SENTRY_PROJECT,
-      authToken: process.env.SENTRY_AUTH_TOKEN,
-      silent: !process.env.CI,
-      autoInstrumentServerFunctions: true,
-      automaticVercelMonitors: true,
-      telemetry: false,
-    })
-  : nextConfig;
+// Sentry webpack plugin (withSentryConfig) is intentionally NOT applied here.
+// The sentry.client/server/edge.config.ts files are in place and the SDK is
+// installed. Re-add withSentryConfig once SENTRY_ORG, SENTRY_PROJECT, and
+// SENTRY_AUTH_TOKEN are configured in the Vercel environment — see LAUNCH_CHECKLIST.md.
+export default nextConfig;

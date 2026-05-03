@@ -56,8 +56,8 @@ export default function AboutPage() {
           Why we built this
         </h2>
         <p className="text-sm text-muted leading-relaxed">
-          When you're a new mum, every decision feels high-stakes — which
-          formula to try, which crèche to trust with your baby, which
+          When you&apos;re a new mum, every decision feels high-stakes — which
+          formula to try, which cr&egrave;che to trust with your baby, which
           paediatrician actually listens. And yet the information you need most
           is scattered across WhatsApp groups, buried in comment threads, or
           simply word-of-mouth from whoever you happen to know.
@@ -65,12 +65,12 @@ export default function AboutPage() {
         <p className="text-sm text-muted leading-relaxed">
           MumRated! was built to fix that. We wanted one place where mums could
           find honest, experience-based reviews on the products and services
-          that matter most to their families — written by people who've actually
-          been there.
+          that matter most to their families — written by people who&apos;ve
+          actually been there.
         </p>
         <p className="text-sm text-muted leading-relaxed">
-          We started in Nigeria because that's where the gap was clearest. But
-          the need is universal: every mum, everywhere, deserves access to
+          We started in Nigeria because that&apos;s where the gap was clearest.
+          But the need is universal: every mum, everywhere, deserves access to
           trusted information from other mums.
         </p>
       </section>
@@ -83,15 +83,16 @@ export default function AboutPage() {
           What MumRated! covers
         </h2>
         <p className="text-sm text-muted leading-relaxed">
-          From nappies to crèches, baby formula to birthday party planners —
-          if it's relevant to a mum's life with her child, it belongs on
-          MumRated!.
+          From nappies to cr&egrave;ches, baby formula to birthday party
+          planners — if it&apos;s relevant to a mum&apos;s life with her child,
+          it belongs on MumRated!.
         </p>
         <div className="grid sm:grid-cols-2 gap-3">
           {[
             {
               category: "Products",
-              examples: "Baby formula, nappies, prams, feeding gear, wipes, sterilisers",
+              examples:
+                "Baby formula, nappies, prams, feeding gear, wipes, sterilisers",
             },
             {
               category: "Childcare",
@@ -107,11 +108,13 @@ export default function AboutPage() {
             },
             {
               category: "Events & celebrations",
-              examples: "Birthday party planners, bounce houses, children's entertainers",
+              examples:
+                "Birthday party planners, bounce houses, children's entertainers",
             },
             {
               category: "Photography",
-              examples: "Newborn photographers, family portrait studios, baby milestone shoots",
+              examples:
+                "Newborn photographers, family portrait studios, baby milestone shoots",
             },
           ].map((item) => (
             <div
@@ -128,12 +131,12 @@ export default function AboutPage() {
           ))}
         </div>
         <p className="text-sm text-muted">
-          Don't see your category?{" "}
+          Don&apos;t see your category?{" "}
           <a
             href="mailto:hello@mumrated.com"
             className="text-crimson hover:underline font-medium"
           >
-            Tell us what's missing.
+            Tell us what&apos;s missing.
           </a>
         </p>
       </section>
@@ -163,9 +166,9 @@ export default function AboutPage() {
           Get in touch
         </h2>
         <p className="text-sm text-muted leading-relaxed">
-          We're a small team and we read every message. Whether you have a
+          We&apos;re a small team and we read every message. Whether you have a
           question, a suggestion, a complaint, or just want to say hello —
-          we'd love to hear from you.
+          we&apos;d love to hear from you.
         </p>
         <div className="rounded-card bg-bgLight border border-border px-5 py-4 space-y-2 text-sm">
           <p>

@@ -68,7 +68,7 @@ export default function HowItWorksPage() {
         <p className="mt-4 text-muted text-base leading-relaxed">
           MumRated! is a review platform built around one idea: mums deserve
           honest, experience-based information when making decisions for their
-          families. Here's how it all fits together.
+          families. Here&apos;s how it all fits together.
         </p>
       </header>
 
@@ -109,7 +109,7 @@ export default function HowItWorksPage() {
           </h2>
           <p className="text-sm text-muted leading-relaxed">
             Our core promise is that visibility on MumRated! is never for sale.
-            Here's what that means in practice.
+            Here&apos;s what that means in practice.
           </p>
         </div>
         <div className="grid sm:grid-cols-2 gap-3">

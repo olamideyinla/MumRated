@@ -51,9 +51,9 @@ const principles = [
       "Reviews belong to the mums who wrote them. You can respond, but you cannot remove. MumRated! only removes reviews that violate community guidelines.",
   },
   {
-    label: "Verification ≠ endorsement",
+    label: "Verification does not equal endorsement",
     detail:
-      "Claiming and verifying your listing confirms your identity. It does not mean MumRated! endorses the quality of your product or service — that's what the ratings are for.",
+      "Claiming and verifying your listing confirms your identity. It does not mean MumRated! endorses the quality of your product or service — that is what the ratings are for.",
   },
 ];
 
@@ -86,7 +86,7 @@ export default function ProvidersPage() {
           the community and belong to the community.
         </p>
         <p className="text-sm text-muted leading-relaxed">
-          If your business is already listed, you can claim it. If it isn't,
+          If your business is already listed, you can claim it. If it is not,
           you can add it yourself — or ask us to add it by getting in touch.
         </p>
         <div className="rounded-card bg-bgLight border border-border px-5 py-4 space-y-2">
@@ -163,11 +163,11 @@ export default function ProvidersPage() {
           Claiming and verifying your listing is paid — this covers the cost of
           identity verification and keeps the platform free for mums. Listing
           itself (unclaimed) is always free, and mums can review any listing at
-          any time regardless of whether you've claimed it.
+          any time regardless of whether you&apos;ve claimed it.
         </p>
         <p className="text-sm text-muted leading-relaxed">
-          We're in early access. If you'd like to claim your listing, contact
-          us and we'll walk you through the process.
+          We&apos;re in early access. If you&apos;d like to claim your listing,
+          contact us and we&apos;ll walk you through the process.
         </p>
       </section>
 
@@ -182,16 +182,16 @@ export default function ProvidersPage() {
           <Link href="/browse" className="btn-primary">
             Find your listing
           </Link>
-          <a
-            href="mailto:hello@mumrated.com"
-            className="btn-outline"
-          >
+          <a href="mailto:hello@mumrated.com" className="btn-outline">
             Contact us to claim
           </a>
         </div>
         <p className="text-xs text-muted">
           Already claimed?{" "}
-          <Link href="/sign-in" className="text-crimson hover:underline font-medium">
+          <Link
+            href="/sign-in"
+            className="text-crimson hover:underline font-medium"
+          >
             Sign in to your provider account
           </Link>
         </p>

@@ -67,7 +67,7 @@ export default function LandingPage() {
             <Link href="/home" className={`${s.btnO} ${s.navBtnOHide}`} style={{ fontSize: 13, padding: "9px 18px" }}>
               Browse
             </Link>
-            <Link href="/home" className={s.btnP} style={{ fontSize: 13, padding: "9px 18px" }}>
+            <Link href="/review/new" className={s.btnP} style={{ fontSize: 13, padding: "9px 18px" }}>
               + Review
             </Link>
             <button
@@ -111,6 +111,27 @@ export default function LandingPage() {
                 From diapers to paediatric hospitals, cr&egrave;ches to naming-ceremony photographers.
                 Honest, experience-based reviews from mums who have been exactly where you are.
               </p>
+              <form
+                action="/search"
+                method="GET"
+                style={{ display: "flex", marginTop: 24, maxWidth: 460, background: "#fff", borderRadius: 30, border: "1.5px solid var(--border)", overflow: "hidden", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}
+              >
+                <input
+                  type="search"
+                  name="q"
+                  placeholder="Search crèches, hospitals, photographers…"
+                  style={{ flex: 1, padding: "13px 18px", fontSize: 14, border: "none", outline: "none", background: "transparent", color: "var(--dark)", fontFamily: "inherit", minWidth: 0 }}
+                  aria-label="Search listings"
+                />
+                <button
+                  type="submit"
+                  style={{ padding: "13px 20px", background: "var(--crimson)", color: "var(--bg)", border: "none", cursor: "pointer", fontSize: 14, fontWeight: 700, fontFamily: "inherit", borderRadius: "0 28px 28px 0", flexShrink: 0 }}
+                  aria-label="Search"
+                >
+                  Search
+                </button>
+              </form>
+
               <div className={s.heroCtas}>
                 <Link href="/home" className={s.btnP} style={{ fontSize: 16, padding: "14px 32px" }}>
                   Browse Reviews
@@ -253,9 +274,9 @@ export default function LandingPage() {
           </div>
           <div className={`${s.reviewsGrid} ${s.reveal}`}>
             {[
-              { ini: "AO", ac: "#7B1818", name: "Adaeze O.", loc: "Lagos Island", cat: "Nappies", product: "Baby Diapers (Size 3)", text: "Best diapers I have used since my first born. No leaks overnight, my son sleeps peacefully and wakes up dry. Worth every kobo." },
-              { ini: "NE", ac: "#2A4B8A", name: "Ngozi E.", loc: "Abuja", cat: "Paediatric Hospitals", product: "Lagoon Hospital, Victoria Island", text: "The paediatric ward is exceptional. Clean, organised, and the consultants actually take time to explain what is going on. My twins were admitted for three days and I never felt left in the dark." },
-              { ini: "FB", ac: "#8A5A00", name: "Funke B.", loc: "Port Harcourt", cat: "Photographers", product: "Snapshots by Tolu", text: "She captured my son\u2019s naming ceremony so beautifully I cried. Professional, patient, and delivered within a week. Book her NOW." },
+              { ini: "AO", ac: "#7B1818", name: "Adaeze O.", loc: "Lagos Island", cat: "Nappies", product: "Baby Diapers (Size 3)", text: "Best diapers I have used since my first born. No leaks overnight, my son sleeps peacefully and wakes up dry. Worth every kobo.", date: "March 2025" },
+              { ini: "NE", ac: "#2A4B8A", name: "Ngozi E.", loc: "Abuja", cat: "Paediatric Hospitals", product: "Lagoon Hospital, Victoria Island", text: "The paediatric ward is exceptional. Clean, organised, and the consultants actually take time to explain what is going on. My twins were admitted for three days and I never felt left in the dark.", date: "January 2025" },
+              { ini: "FB", ac: "#8A5A00", name: "Funke B.", loc: "Port Harcourt", cat: "Photographers", product: "Snapshots by Tolu", text: "She captured my son\u2019s naming ceremony so beautifully I cried. Professional, patient, and delivered within a week. Book her NOW.", date: "April 2025" },
             ].map((r) => (
               <div key={r.ini} className={`${s.card} ${s.reviewCard}`}>
                 <div className={s.reviewer}>
@@ -273,6 +294,10 @@ export default function LandingPage() {
                   {r.product}
                 </div>
                 <p style={{ fontSize: 13, color: "var(--mid)", lineHeight: 1.65 }}>&ldquo;{r.text}&rdquo;</p>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 12 }}>
+                  <span style={{ fontSize: 11, color: "var(--muted)" }}>{r.date}</span>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: "#2A6B3A", background: "#E8F3EC", borderRadius: 20, padding: "2px 8px" }}>✓ Verified Mum</span>
+                </div>
               </div>
             ))}
           </div>
@@ -280,6 +305,35 @@ export default function LandingPage() {
             <Link href="/home" className={s.btnP} style={{ fontSize: 15, padding: "13px 36px" }}>
               See all reviews
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── ABOUT ── */}
+      <section id="about" className={s.section} style={{ background: "var(--bgL)" }}>
+        <div className={`${s.container} ${s.reveal}`} style={{ textAlign: "center", maxWidth: 720, margin: "0 auto" }}>
+          <div className={s.label}>Built by mums</div>
+          <h2 className={s.secTitle} style={{ marginBottom: 16 }}>
+            We are not <strong>JUST</strong> building for mums, we are mums.
+          </h2>
+          <p style={{ fontSize: 15, color: "var(--mid)", lineHeight: 1.8, marginBottom: 28 }}>
+            MumRated! was founded by two Nigerian mum bloggers with deep community trust and combined digital reach
+            across Nigeria and the diaspora. We sit at the centre of the audience this platform serves.
+            That is the moat that compounds.
+          </p>
+          <div className={s.aboutStats}>
+            <div className={s.aboutStat} style={{ background: "#FBF0E8" }}>
+              <div className={s.aboutStatN} style={{ color: "var(--crimson)" }}>2</div>
+              <div className={s.aboutStatL}>Mum-blogger founders</div>
+            </div>
+            <div className={s.aboutStat} style={{ background: "#E8F3EC" }}>
+              <div className={s.aboutStatN} style={{ color: "#2A6B3A" }}>1M+</div>
+              <div className={s.aboutStatL}>Combined community reach</div>
+            </div>
+            <div className={s.aboutStat} style={{ background: "#E8EDF8" }}>
+              <div className={s.aboutStatN} style={{ color: "#2A4B8A" }}>Day 1</div>
+              <div className={s.aboutStatL}>Seed audience, built-in</div>
+            </div>
           </div>
         </div>
       </section>
@@ -334,35 +388,6 @@ export default function LandingPage() {
                   </div>
                 </div>
               ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── ABOUT ── */}
-      <section id="about" className={s.section} style={{ background: "var(--bgL)" }}>
-        <div className={`${s.container} ${s.reveal}`} style={{ textAlign: "center", maxWidth: 720, margin: "0 auto" }}>
-          <div className={s.label}>Built by mums</div>
-          <h2 className={s.secTitle} style={{ marginBottom: 16 }}>
-            We are not building for Nigerian mums. We are Nigerian mums.
-          </h2>
-          <p style={{ fontSize: 15, color: "var(--mid)", lineHeight: 1.8, marginBottom: 28 }}>
-            MumRated! was founded by two Nigerian mum bloggers with deep community trust and combined digital reach
-            across Nigeria and the diaspora. We sit at the centre of the audience this platform serves.
-            That is the moat that compounds.
-          </p>
-          <div className={s.aboutStats}>
-            <div className={s.aboutStat} style={{ background: "#FBF0E8" }}>
-              <div className={s.aboutStatN} style={{ color: "var(--crimson)" }}>2</div>
-              <div className={s.aboutStatL}>Mum-blogger founders</div>
-            </div>
-            <div className={s.aboutStat} style={{ background: "#E8F3EC" }}>
-              <div className={s.aboutStatN} style={{ color: "#2A6B3A" }}>1M+</div>
-              <div className={s.aboutStatL}>Combined community reach</div>
-            </div>
-            <div className={s.aboutStat} style={{ background: "#E8EDF8" }}>
-              <div className={s.aboutStatN} style={{ color: "#2A4B8A" }}>Day 1</div>
-              <div className={s.aboutStatL}>Seed audience, built-in</div>
             </div>
           </div>
         </div>

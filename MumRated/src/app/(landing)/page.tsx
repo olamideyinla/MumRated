@@ -64,7 +64,7 @@ export default function LandingPage() {
           </div>
 
           <div className={s.navCtas}>
-            <Link href="/home" className={`${s.btnO} ${s.navBtnOHide}`} style={{ fontSize: 13, padding: "9px 18px" }}>
+            <Link href="/home" className={`${s.btnP} ${s.navBtnOHide}`} style={{ fontSize: 13, padding: "9px 18px" }}>
               Browse
             </Link>
             <Link href="/review/new" className={s.btnP} style={{ fontSize: 13, padding: "9px 18px" }}>

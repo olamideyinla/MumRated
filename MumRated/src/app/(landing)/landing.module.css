@@ -57,7 +57,7 @@
 .btnP {
   display: inline-block;
   background: var(--crimson);
-  color: var(--bg);
+  color: #fff;
   padding: 13px 28px;
   border-radius: 30px;
   font-weight: 700;

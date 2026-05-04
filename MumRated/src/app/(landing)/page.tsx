@@ -310,31 +310,19 @@ export default function LandingPage() {
       </section>
 
       {/* ── ABOUT ── */}
-      <section id="about" className={s.section} style={{ background: "var(--bgL)" }}>
-        <div className={`${s.container} ${s.reveal}`} style={{ textAlign: "center", maxWidth: 720, margin: "0 auto" }}>
+      <section id="about" className={s.section} style={{ background: "var(--bgL)", padding: "80px 0" }}>
+        <div className={`${s.container} ${s.reveal}`} style={{ textAlign: "center", maxWidth: 640, margin: "0 auto" }}>
           <div className={s.label}>Built by mums</div>
-          <h2 className={s.secTitle} style={{ marginBottom: 16 }}>
-            We are not <strong>JUST</strong> building for mums, we are mums.
+          <h2 className={s.secTitle} style={{ marginBottom: 20 }}>
+            Built by mums. Powered by mums.
           </h2>
-          <p style={{ fontSize: 15, color: "var(--mid)", lineHeight: 1.8, marginBottom: 28 }}>
-            MumRated! was founded by two Nigerian mum bloggers with deep community trust and combined digital reach
-            across Nigeria and the diaspora. We sit at the centre of the audience this platform serves.
-            That is the moat that compounds.
+          <p style={{ fontSize: 16, color: "var(--mid)", lineHeight: 1.85, marginBottom: 20 }}>
+            MumRated is mum-led from top to bottom. Founders, moderators, community managers, content team
+            — every role filled by a mum who has lived the problem we are solving.
           </p>
-          <div className={s.aboutStats}>
-            <div className={s.aboutStat} style={{ background: "#FBF0E8" }}>
-              <div className={s.aboutStatN} style={{ color: "var(--crimson)" }}>2</div>
-              <div className={s.aboutStatL}>Mum-blogger founders</div>
-            </div>
-            <div className={s.aboutStat} style={{ background: "#E8F3EC" }}>
-              <div className={s.aboutStatN} style={{ color: "#2A6B3A" }}>1M+</div>
-              <div className={s.aboutStatL}>Combined community reach</div>
-            </div>
-            <div className={s.aboutStat} style={{ background: "#E8EDF8" }}>
-              <div className={s.aboutStatN} style={{ color: "#2A4B8A" }}>Day 1</div>
-              <div className={s.aboutStatL}>Seed audience, built-in</div>
-            </div>
-          </div>
+          <p style={{ fontSize: 17, color: "var(--dark)", lineHeight: 1.75, fontStyle: "italic", fontFamily: "var(--font-playfair,'Playfair Display',serif)", fontWeight: 700 }}>
+            We are not building this for mums. We are the mums building it.
+          </p>
         </div>
       </section>
 

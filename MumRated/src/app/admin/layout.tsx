@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { href: "/admin/categories", label: "Categories", icon: "🗂" },
   { href: "/admin/users", label: "Users", icon: "👥" },
   { href: "/admin/provider-claims", label: "Provider Claims", icon: "🏢" },
+  { href: "/admin/waitlist", label: "Waitlist", icon: "✉️" },
   { href: "/admin/audit-log", label: "Audit Log", icon: "📜" },
 ];
 

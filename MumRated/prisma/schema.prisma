@@ -414,3 +414,16 @@ model AdminAction {
   @@index([adminUserId])
   @@index([createdAt(sort: Desc)])
 }
+
+// ══════════════════════════════════════════════════════════════════════════
+// WAITLIST ENTRY — captures emails from the "Be Part of the Movement" CTA
+// on the landing page. Unique on email so re-submits are silently ignored.
+// ══════════════════════════════════════════════════════════════════════════
+
+model WaitlistEntry {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+
+  @@index([createdAt(sort: Desc)])
+}

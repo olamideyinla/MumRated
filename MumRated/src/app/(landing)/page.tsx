@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useTransition } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import s from "./landing.module.css";
@@ -12,6 +12,8 @@ export default function LandingPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [joined, setJoined] = useState(false);
+  const [joinError, setJoinError] = useState("");
+  const [isPending, startTransition] = useTransition();
   const pageRef = useRef<HTMLDivElement>(null);
 
   // Scroll-reveal via IntersectionObserver
@@ -31,9 +33,27 @@ export default function LandingPage() {
 
   function handleJoin(e: React.FormEvent) {
     e.preventDefault();
-    if (email && email.includes("@")) {
-      setJoined(true);
+    setJoinError("");
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setJoinError("Please enter a valid email address.");
+      return;
     }
+    startTransition(async () => {
+      try {
+        const res = await fetch("/api/waitlist", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        });
+        if (res.ok) {
+          setJoined(true);
+        } else {
+          setJoinError("Something went wrong — please try again.");
+        }
+      } catch {
+        setJoinError("Something went wrong — please try again.");
+      }
+    });
   }
 
   return (
@@ -400,19 +420,29 @@ export default function LandingPage() {
           </p>
           {joined ? (
             <p style={{ color: "#fff", fontSize: 15, fontWeight: 600, marginBottom: 16 }}>
-              You&rsquo;re in! Check your inbox for the magic link. ★
+              You&rsquo;re in! Check your inbox for a welcome email. ✓
             </p>
           ) : (
-            <form onSubmit={handleJoin} className={s.emailRow}>
-              <input
-                type="email"
-                placeholder="Your email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                aria-label="Email address"
-              />
-              <button type="submit">Get started →</button>
-            </form>
+            <>
+              <form onSubmit={handleJoin} className={s.emailRow}>
+                <input
+                  type="email"
+                  placeholder="Your email address"
+                  value={email}
+                  onChange={(e) => { setEmail(e.target.value); if (joinError) setJoinError(""); }}
+                  aria-label="Email address"
+                  disabled={isPending}
+                />
+                <button type="submit" disabled={isPending}>
+                  {isPending ? "Joining…" : "Get started →"}
+                </button>
+              </form>
+              {joinError && (
+                <p style={{ color: "rgba(255,200,200,0.9)", fontSize: 13, marginTop: 8 }}>
+                  {joinError}
+                </p>
+              )}
+            </>
           )}
           <Link href="/home" style={{ color: "rgba(255,255,255,0.6)", fontSize: 13, textDecoration: "underline" }}>
             Or browse reviews now →

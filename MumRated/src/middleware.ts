@@ -7,7 +7,10 @@ const PROTECTED_PREFIXES = ["/review/new", "/profile", "/provider/dashboard", "/
 export default auth((req) => {
   const { pathname } = req.nextUrl;
 
-  const needsAuth = PROTECTED_PREFIXES.some((prefix) =>
+  // Also protect /listing/[slug]/review — can't use startsWith alone for this pattern
+  const isReviewPage = pathname.startsWith("/listing/") && pathname.endsWith("/review");
+
+  const needsAuth = isReviewPage || PROTECTED_PREFIXES.some((prefix) =>
     pathname.startsWith(prefix),
   );
 

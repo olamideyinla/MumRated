@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function SignInForm() {
   const params = useSearchParams();
-  const callbackUrl = params.get("callbackUrl") ?? "/";
+  const callbackUrl = params.get("callbackUrl") ?? "/home";
   const errorCode = params.get("error");
 
   const [email, setEmail] = useState("");
@@ -17,10 +17,12 @@ export default function SignInForm() {
 
   const errorMessages: Record<string, string> = {
     OAuthAccountNotLinked:
-      "That email is already linked to a different sign-in method. Try Google — or send yourself a magic link.",
+      "That email is already linked to a different sign-in method. Try Google, or send yourself a magic link.",
     OAuthCallbackError:
-      "Google didn't play ball this time. Give it another go.",
-    Default: "Something went sideways. Try again and it should clear up.",
+      "Google sign-in didn't complete. Give it another go.",
+    Verification:
+      "That link has expired or has already been used. Enter your email below to get a fresh one.",
+    Default: "Sign-in didn't complete. Please try again.",
   };
 
   const errorMessage = errorCode

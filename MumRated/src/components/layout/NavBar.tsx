@@ -10,7 +10,7 @@ export default async function NavBar() {
       <div className="container flex h-14 items-center justify-between">
         {/* Logo */}
         <Link
-          href="/"
+          href="/home"
           className="font-display text-xl font-bold text-crimson tracking-tight"
         >
           MumRated<span className="text-gold">!</span>

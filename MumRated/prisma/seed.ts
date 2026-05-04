@@ -75,7 +75,7 @@ async function main() {
         where: { slug: "paediatricians" },
         update: {},
         create: {
-          name: "Paediatricians",
+          name: "Paediatric Hospitals",
           slug: "paediatricians",
           type: "SERVICE",
         },
@@ -291,42 +291,42 @@ async function main() {
     },
   });
 
-  // Services — Paediatricians (2)
-  const drAmaka = await db.listing.upsert({
-    where: { slug: "dr-amaka-osei-paediatrician-lekki" },
+  // Services — Paediatric Hospitals (2)
+  const lagoonHospital = await db.listing.upsert({
+    where: { slug: "lagoon-hospital-victoria-island-lagos" },
     update: {},
     create: {
       type: "SERVICE",
-      name: "Dr. Amaka Osei — Paediatrician",
-      slug: "dr-amaka-osei-paediatrician-lekki",
+      name: "Lagoon Hospital — Victoria Island",
+      slug: "lagoon-hospital-victoria-island-lagos",
       description:
-        "Consultant paediatrician with 14 years experience. Accepts walk-ins and appointments.",
-      brandOrProvider: "Dr. Amaka Osei",
+        "One of Lagos's leading private hospitals with a dedicated paediatric ward and 24-hour children's emergency unit. Specialists on site daily.",
+      brandOrProvider: "Lagoon Hospitals",
       categoryId: catPaeds.id,
-      locationText: "Lekki Phase 1, Lagos",
-      priceRangeNGN: "₦15,000 – ₦25,000 per consult",
-      priceRangeMin: 15000,
-      priceRangeMax: 25000,
+      locationText: "3 Idowu Taylor Street, Victoria Island, Lagos",
+      priceRangeNGN: "₦25,000 – ₦60,000 per visit",
+      priceRangeMin: 25000,
+      priceRangeMax: 60000,
       claimStatus: "UNCLAIMED",
       createdById: funke.id,
     },
   });
 
-  const drChukwu = await db.listing.upsert({
-    where: { slug: "dr-chukwu-paediatrics-wuse" },
+  const cedarcrest = await db.listing.upsert({
+    where: { slug: "cedarcrest-hospitals-abuja" },
     update: {},
     create: {
       type: "SERVICE",
-      name: "Dr. Chukwu Paediatrics, Wuse",
-      slug: "dr-chukwu-paediatrics-wuse",
+      name: "Cedarcrest Hospitals — Abuja",
+      slug: "cedarcrest-hospitals-abuja",
       description:
-        "Busy but thorough paediatrics clinic in Wuse 2. Well-organised waiting area.",
-      brandOrProvider: "Dr. Chukwu",
+        "Abuja's top-rated private hospital with a fully equipped paediatric unit. Known for short wait times, child-friendly wards, and consultant paediatricians on rotation.",
+      brandOrProvider: "Cedarcrest Hospitals",
       categoryId: catPaeds.id,
-      locationText: "Wuse 2, Abuja",
-      priceRangeNGN: "₦12,000 – ₦20,000 per consult",
-      priceRangeMin: 12000,
-      priceRangeMax: 20000,
+      locationText: "Cadastral Zone, Jabi, Abuja",
+      priceRangeNGN: "₦20,000 – ₦50,000 per visit",
+      priceRangeMin: 20000,
+      priceRangeMax: 50000,
       claimStatus: "UNCLAIMED",
       createdById: adaeze.id,
     },
@@ -334,7 +334,7 @@ async function main() {
 
   const listings = {
     pampers, huggies, molfix, cerelac, aptamil,
-    graco, littleStars, happyKids, drAmaka, drChukwu,
+    graco, littleStars, happyKids, lagoonHospital, cedarcrest,
   };
   console.log(`     ✓ ${Object.keys(listings).length} listings`);
 
@@ -544,13 +544,13 @@ async function main() {
       helpfulCount: 33,
     },
 
-    // ── Dr. Amaka (2 reviews) ────────────────────────────────────────────
+    // ── Lagoon Hospital VI (2 reviews) ──────────────────────────────────
     {
-      listingId: drAmaka.id,
+      listingId: lagoonHospital.id,
       userId: adaeze.id,
       rating: 5,
-      text: "She is patient, explains everything clearly, and does not rush you out of the room. My twins have been seeing her since birth. She remembers every child's history without needing to look at the file.",
-      tags: ["Patient", "Explains clearly", "Remembers patients"],
+      text: "The paediatric ward at Lagoon VI is exceptional. Clean, organised, and the consultants actually take time to explain what is going on. My twins were admitted for three days and I never felt left in the dark. Worth the cost.",
+      tags: ["Clean facility", "Attentive consultants", "Child-friendly"],
       cityAtReview: "Lagos Island",
       childAgeBandAtReview: "TODDLER",
       structuredAnswers: {
@@ -562,51 +562,51 @@ async function main() {
       helpfulCount: 52,
     },
     {
-      listingId: drAmaka.id,
+      listingId: lagoonHospital.id,
       userId: ngozi.id,
       rating: 5,
-      text: "Best paediatrician I have found in Lagos. She speaks plainly, no unnecessary prescriptions, and always follows up. Highly recommend to any mum in Lekki.",
-      tags: ["No over-prescribing", "Follows up", "Lagos Lekki"],
+      text: "Best children's hospital I have used in Lagos. The 24-hour emergency team responded immediately when my son had a fever spike at midnight. No unnecessary tests, clear explanations, follow-up call the next morning.",
+      tags: ["24hr emergency", "No over-testing", "Quick response"],
       cityAtReview: "Abuja",
       childAgeBandAtReview: "INFANT",
       structuredAnswers: {
         wouldRecommend: true,
-        waitTime: "30 minutes",
+        waitTime: "15 minutes",
         staffRating: 5,
         facilityRating: 5,
       },
       helpfulCount: 38,
     },
 
-    // ── Dr. Chukwu (2 reviews) ───────────────────────────────────────────
+    // ── Cedarcrest Abuja (2 reviews) ─────────────────────────────────────
     {
-      listingId: drChukwu.id,
+      listingId: cedarcrest.id,
       userId: funke.id,
       rating: 4,
-      text: "Good doctor but the waiting time can be up to 2 hours. Worth it for the quality of care though — very thorough and calm. The clinic is clean and well organised.",
-      tags: ["Thorough", "Calm manner", "Long wait"],
+      text: "Cedarcrest is my go-to in Abuja for anything paediatric. The waiting area has a play corner which my toddler loves, and the paediatric consultants are thorough without being alarmist. Only gripe is the billing desk can be slow.",
+      tags: ["Child-friendly waiting area", "Thorough", "Slow billing"],
       cityAtReview: "Port Harcourt",
       childAgeBandAtReview: "INFANT",
       structuredAnswers: {
         wouldRecommend: true,
-        waitTime: "90–120 minutes",
+        waitTime: "30 minutes",
         staffRating: 4,
-        facilityRating: 4,
+        facilityRating: 5,
       },
       helpfulCount: 26,
     },
     {
-      listingId: drChukwu.id,
+      listingId: cedarcrest.id,
       userId: adaeze.id,
       rating: 4,
-      text: "Competent and careful. He caught an ear infection my son was not even complaining about. The receptionist could be more organised but the doctor himself is excellent.",
-      tags: ["Thorough examination", "Catches issues early"],
+      text: "Good hospital overall. The paediatric consultant caught a mild anaemia my son's school nurse had missed. Facility is clean and modern. Wish they had a second location in Gwarinpa — the Jabi branch can get busy on weekends.",
+      tags: ["Catches issues early", "Modern facility", "Gets busy"],
       cityAtReview: "Lagos Island",
       childAgeBandAtReview: "TODDLER",
       structuredAnswers: {
         wouldRecommend: true,
         waitTime: "45 minutes",
-        staffRating: 3,
+        staffRating: 4,
         facilityRating: 4,
       },
       helpfulCount: 14,
@@ -694,8 +694,8 @@ async function main() {
     [6, "ngozi"],  // ngozi votes helpful on adaeze's Aptamil review
     [6, "funke"],  // funke votes helpful on adaeze's Aptamil review
     [10, "adaeze"],// adaeze votes helpful on ngozi's Happy Kids review
-    [11, "funke"], // funke votes helpful on adaeze's Dr. Amaka review
-    [12, "adaeze"],// adaeze votes helpful on ngozi's Dr. Amaka review
+    [11, "funke"], // funke votes helpful on adaeze's Lagoon Hospital review
+    [12, "adaeze"],// adaeze votes helpful on ngozi's Lagoon Hospital review
   ];
 
   let votesCreated = 0;

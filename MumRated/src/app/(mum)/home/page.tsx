@@ -45,7 +45,7 @@ const FEATURED_CATEGORIES = [
   { slug: "nappies-essentials", label: "Nappies & Essentials", icon: "🧷" },
   { slug: "baby-food-nutrition", label: "Baby Food & Nutrition", icon: "🍼" },
   { slug: "creches-schools", label: "Crèches & Schools", icon: "🏫" },
-  { slug: "paediatricians", label: "Paediatricians", icon: "👩‍⚕️" },
+  { slug: "paediatricians", label: "Paediatric Hospitals", icon: "🏥" },
   { slug: "baby-products", label: "Baby Products", icon: "🛒" },
 ];
 

@@ -11,6 +11,13 @@ export const metadata: Metadata = {
     description:
       "Nappies, crèches, paediatricians, baby food and more, all rated by Nigerian mums.",
     type: "website",
+    images: [{ url: "/logo-stamp.png", width: 512, height: 512, alt: "MumRated! logo" }],
+  },
+  twitter: {
+    card: "summary",
+    title: "Browse all categories, MumRated!",
+    description: "Nappies, crèches, paediatricians, baby food and more, all rated by Nigerian mums.",
+    images: ["/logo-stamp.png"],
   },
 };
 

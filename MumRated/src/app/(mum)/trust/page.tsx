@@ -23,6 +23,13 @@ export const metadata: Metadata = {
     title: "How MumRated! Works, Trust & Transparency",
     description: "The full truth about how reviews work on MumRated!",
     type: "website",
+    images: [{ url: "/logo-stamp.png", width: 512, height: 512, alt: "MumRated! logo" }],
+  },
+  twitter: {
+    card: "summary",
+    title: "How MumRated! Works, Trust & Transparency | MumRated!",
+    description: "The full truth about how reviews work on MumRated!",
+    images: ["/logo-stamp.png"],
   },
 };
 

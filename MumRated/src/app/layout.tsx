@@ -49,12 +49,14 @@ export const metadata: Metadata = {
     title: "MumRated! — Say it. Rate it. Trust it.",
     description:
       "Honest reviews from Nigerian mums. Products, crèches, paediatricians, photographers and more.",
+    images: [{ url: "/logo-stamp.png", width: 512, height: 512, alt: "MumRated! logo" }],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: "MumRated!",
     description: "The reviews Nigerian mums actually trust.",
     creator: "@mumrated",
+    images: ["/logo-stamp.png"],
   },
   robots: {
     index: true,
@@ -81,6 +83,9 @@ export default function RootLayout({
       <body className="font-body">
         {/* Skip-to-content — first focusable element on the page.
             Hidden visually until focused; essential for keyboard/screen-reader users. */}
+        {/* Preconnect to Cloudinary CDN for faster image loads */}
+        {/* eslint-disable-next-line @next/next/no-head-element */}
+        <link rel="preconnect" href="https://res.cloudinary.com" />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:rounded-lg focus:bg-crimson focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg focus:outline-none"

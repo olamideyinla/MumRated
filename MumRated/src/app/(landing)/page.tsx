@@ -162,8 +162,8 @@ export default function LandingPage() {
               </div>
               <div className={s.heroStats}>
                 <div>
-                  <div className={s.heroStatN}>5,000+</div>
-                  <div className={s.heroStatL}>Mums sharing honest reviews</div>
+                  <div className={s.heroStatN}>Thousands</div>
+                  <div className={s.heroStatL}>of mums sharing honest reviews</div>
                 </div>
               </div>
             </div>

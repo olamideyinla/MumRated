@@ -82,7 +82,10 @@ export default function SignInForm() {
           </div>
 
           {errorMessage && (
-            <div className="rounded-card bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+            <div
+              role="alert"
+              className="rounded-card bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700"
+            >
               {errorMessage}
             </div>
           )}
@@ -91,6 +94,7 @@ export default function SignInForm() {
           <button
             onClick={handleGoogleSignIn}
             disabled={isPending}
+            aria-busy={isPending}
             className="w-full flex items-center justify-center gap-3 rounded-input border border-border bg-card px-4 py-3 text-sm font-medium text-dark shadow-card-sm transition hover:shadow-card hover:border-mid disabled:opacity-60"
           >
             <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
@@ -132,14 +136,17 @@ export default function SignInForm() {
                   value={email}
                   onChange={(e) => { setEmail(e.target.value); if (emailError) setEmailError(""); }}
                   placeholder="you@example.com"
+                  aria-describedby={emailError ? "email-error" : undefined}
+                  aria-invalid={!!emailError}
                   className="mt-1 w-full rounded-input border border-border bg-card px-3.5 py-2.5 text-sm text-dark placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-crimson/40 focus:border-crimson"
                 />
-                {emailError && <p className="mt-1 text-xs text-red-600">{emailError}</p>}
+                {emailError && <p id="email-error" role="alert" className="mt-1 text-xs text-red-600">{emailError}</p>}
               </div>
 
               <button
                 type="submit"
                 disabled={isPending}
+                aria-busy={isPending}
                 className="btn-primary w-full disabled:opacity-60"
               >
                 {isPending ? "Sending…" : "Send magic link"}

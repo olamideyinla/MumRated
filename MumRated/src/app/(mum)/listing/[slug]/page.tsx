@@ -168,6 +168,8 @@ export default async function ListingPage({ params, searchParams }: Props) {
         "@context": "https://schema.org",
         "@type": "Product",
         name,
+        url: listingUrl,
+        image: heroImage ? [heroImage] : undefined,
         description: description ?? undefined,
         brand: brandOrProvider ? { "@type": "Brand", name: brandOrProvider } : undefined,
         offers: priceRangeNGN
@@ -192,6 +194,8 @@ export default async function ListingPage({ params, searchParams }: Props) {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         name,
+        url: listingUrl,
+        image: heroImage ? [heroImage] : undefined,
         description: description ?? undefined,
         address: locationText ? { "@type": "PostalAddress", addressLocality: locationText } : undefined,
         aggregateRating:
@@ -258,9 +262,8 @@ export default async function ListingPage({ params, searchParams }: Props) {
                   <span className="cat-tag">{category.name}</span>
                   {claimStatus === "CLAIMED" && (
                     <span
-                      className="rounded-pill border border-verified/40 bg-verified/10 px-2 py-0.5 text-xs font-semibold text-verified cursor-help"
-                      title="Identity verified, not an endorsement. Rankings are determined by mum reviews only."
-                      tabIndex={0}
+                      className="rounded-pill border border-verified/40 bg-verified/10 px-2 py-0.5 text-xs font-semibold text-verified"
+                      aria-label="Identity verified, not an endorsement. Rankings are determined by mum reviews only."
                     >
                       ✓ Verified
                     </span>

@@ -26,6 +26,7 @@ export default function ListingCard({ listing }: Props) {
   return (
     <Link
       href={`/listing/${slug}`}
+      aria-label={`View ${name} reviews`}
       className="card group flex flex-col overflow-hidden hover:shadow-card-hover transition-shadow"
     >
       {/* Hero image */}

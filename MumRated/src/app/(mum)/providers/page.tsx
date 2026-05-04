@@ -10,6 +10,13 @@ export const metadata: Metadata = {
     description:
       "Claim your free listing on MumRated! and start building trust with mums.",
     type: "website",
+    images: [{ url: "/logo-stamp.png", width: 512, height: 512, alt: "MumRated! logo" }],
+  },
+  twitter: {
+    card: "summary",
+    title: "For Providers | MumRated!",
+    description: "Claim your free listing on MumRated! and start building trust with mums.",
+    images: ["/logo-stamp.png"],
   },
 };
 

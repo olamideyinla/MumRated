@@ -10,6 +10,13 @@ export const metadata: Metadata = {
     description:
       "Find honest reviews from real mums, here's how MumRated! works.",
     type: "website",
+    images: [{ url: "/logo-stamp.png", width: 512, height: 512, alt: "MumRated! logo" }],
+  },
+  twitter: {
+    card: "summary",
+    title: "How It Works | MumRated!",
+    description: "Find honest reviews from real mums, here's how MumRated! works.",
+    images: ["/logo-stamp.png"],
   },
 };
 
@@ -56,8 +63,52 @@ const trustPoints = [
   },
 ];
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Do I need an account to read reviews?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "No. All reviews are publicly visible without signing in. An account is only required to write a review, mark a review as helpful, or report a concern.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What if a business isn't listed yet?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "You can suggest a new listing from any category page. Once added, any mum can review it immediately — the provider doesn't need to know about it or approve it.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can a provider remove a negative review?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "No. Providers who have claimed their listing can respond publicly to reviews, but they cannot delete them. Only MumRated! can remove a review, and only for a verified violation of community guidelines.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How do I know a reviewer is a real mum?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "We verify email addresses at sign-up and use automated signals to detect co-ordinated fake reviews. If you spot something suspicious, use the Report button on any review.",
+      },
+    },
+  ],
+};
+
 export default function HowItWorksPage() {
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
     <div className="container py-12 max-w-2xl space-y-12">
       {/* Header */}
       <header>
@@ -188,5 +239,6 @@ export default function HowItWorksPage() {
         </div>
       </section>
     </div>
+    </>
   );
 }

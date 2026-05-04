@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import type { Metadata } from "next";
 import s from "./landing.module.css";
 
 // Note: metadata export is ignored in client components — SEO is handled by

@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 import { PAGE_SIZE } from "@/lib/admin";
 import Link from "next/link";
-import { softDeleteListing } from "./actions";
+import DeleteListingButton from "./DeleteListingButton";
 
 export const metadata = { title: "Listings — Admin" };
 
@@ -17,51 +17,6 @@ const STATUS_BADGE: Record<string, string> = {
   ACTIVE: "bg-green-100 text-green-800",
   HIDDEN: "bg-gray-100 text-gray-600",
 };
-
-async function DeleteListingButton({
-  listingId,
-  name,
-}: {
-  listingId: string;
-  name: string;
-}) {
-  async function action(formData: FormData) {
-    "use server";
-    const reason = formData.get("reason") as string;
-    await softDeleteListing(listingId, reason || "Admin removal");
-  }
-
-  return (
-    <form action={action} className="inline">
-      <button
-        type="submit"
-        onClick={(e) => {
-          const reason = window.prompt(
-            `Reason for hiding "${name}"?`,
-            "Admin removal",
-          );
-          if (reason === null) {
-            e.preventDefault();
-            return;
-          }
-          const form = e.currentTarget.closest("form") as HTMLFormElement;
-          let input = form.querySelector<HTMLInputElement>('input[name="reason"]');
-          if (!input) {
-            input = document.createElement("input");
-            input.type = "hidden";
-            input.name = "reason";
-            form.appendChild(input);
-          }
-          input.value = reason;
-        }}
-        className="text-xs text-red-600 hover:underline"
-      >
-        Hide
-      </button>
-      <input type="hidden" name="reason" />
-    </form>
-  );
-}
 
 export default async function ListingsPage({
   searchParams,

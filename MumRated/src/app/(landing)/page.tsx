@@ -121,16 +121,8 @@ export default function LandingPage() {
               </div>
               <div className={s.heroStats}>
                 <div>
-                  <div className={s.heroStatN}>12,000+</div>
-                  <div className={s.heroStatL}>Reviews published</div>
-                </div>
-                <div>
-                  <div className={s.heroStatN}>8</div>
-                  <div className={s.heroStatL}>Categories</div>
-                </div>
-                <div>
-                  <div className={s.heroStatN}>6</div>
-                  <div className={s.heroStatL}>Cities</div>
+                  <div className={s.heroStatN}>5,000+</div>
+                  <div className={s.heroStatL}>Mums sharing honest reviews</div>
                 </div>
               </div>
             </div>
@@ -148,21 +140,6 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-
-      {/* ── TRUST BAR ── */}
-      <div className={s.trustBar}>
-        <div className={s.trustBarInner}>
-          <div className={s.trustBarLabel}>Trusted by mums in</div>
-          <div className={s.trustBarCities}>
-            <span>Lagos</span><span className={s.trustBarSep}>·</span>
-            <span>Abuja</span><span className={s.trustBarSep}>·</span>
-            <span>Port Harcourt</span><span className={s.trustBarSep}>·</span>
-            <span>Ibadan</span><span className={s.trustBarSep}>·</span>
-            <span>Kano</span><span className={s.trustBarSep}>·</span>
-            <span>Enugu</span>
-          </div>
-        </div>
-      </div>
 
       {/* ── PROBLEM ── */}
       <section className={s.section} style={{ background: "var(--bgL)" }}>

@@ -105,11 +105,11 @@ export default function LandingPage() {
             <div className={s.reveal}>
               <div className={s.label}>Nigeria&rsquo;s #1 Mum Review Platform</div>
               <h1 className={s.heroTitle}>
-                The reviews<br />Nigerian mums<br /><em>actually trust.</em>
+                The reviews<br />mums<br /><em>actually trust.</em>
               </h1>
               <p style={{ fontSize: 16, color: "var(--mid)", lineHeight: 1.75, marginTop: 16, maxWidth: 480 }}>
-                From Pampers to paediatricians, cr&egrave;ches to naming-ceremony photographers
-                &mdash; honest, experience-based reviews from mums who have been exactly where you are.
+                From diapers to paediatric hospitals, cr&egrave;ches to naming-ceremony photographers.
+                Honest, experience-based reviews from mums who have been exactly where you are.
               </p>
               <div className={s.heroCtas}>
                 <Link href="/home" className={s.btnP} style={{ fontSize: 16, padding: "14px 32px" }}>
@@ -130,7 +130,7 @@ export default function LandingPage() {
                 </div>
                 <div>
                   <div className={s.heroStatN}>6</div>
-                  <div className={s.heroStatL}>Nigerian cities</div>
+                  <div className={s.heroStatL}>Cities</div>
                 </div>
               </div>
             </div>
@@ -175,11 +175,11 @@ export default function LandingPage() {
               </h2>
               <p style={{ fontSize: 15, color: "var(--mid)", lineHeight: 1.75, marginBottom: 14 }}>
                 Every mum starts from zero. Every time. The same cr&egrave;che question gets asked every week
-                in every group &mdash; and the answers disappear into the thread.
+                in every group. The answers disappear into the thread.
               </p>
               <p style={{ fontSize: 15, color: "var(--mid)", lineHeight: 1.75 }}>
                 MumRated! is the searchable, trusted record that mums have been building in private group chats
-                for years &mdash; now in one place, open to every mum who needs it.
+                for years. Now in one place, open to every mum who needs it.
               </p>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
@@ -192,8 +192,8 @@ export default function LandingPage() {
                 <div className={s.problemCardSub}>&ldquo;Gifted by the brand&rdquo; in tiny text. Trust is collapsing.</div>
               </div>
               <div className={s.problemCard} style={{ background: "#E8E8F0", borderColor: "#2A4B8A44" }}>
-                <div className={s.problemCardTitle} style={{ color: "#2A4B8A" }}>Jumia &amp; marketplace ratings</div>
-                <div className={s.problemCardSub}>Products only &mdash; services don&rsquo;t exist. Often empty or gamed.</div>
+                <div className={s.problemCardTitle} style={{ color: "#2A4B8A" }}>Marketplace ratings</div>
+                <div className={s.problemCardSub}>Products only. Services don&rsquo;t exist. Often empty or gamed.</div>
               </div>
               <div className={s.problemCard} style={{ background: "#FBF0E8", borderColor: "#7B181844" }}>
                 <div className={s.problemCardTitle} style={{ color: "#7B1818" }}>MumRated! ✓</div>
@@ -218,17 +218,17 @@ export default function LandingPage() {
             <div className={s.stepCard} style={{ background: "#FBF0E8" }}>
               <div className={s.stepNum}>1</div>
               <div className={s.stepTitle}>Find it</div>
-              <div className={s.stepBody}>Search by product, brand, service, or location. Browse by category &mdash; from baby formula to birthday decorators.</div>
+              <div className={s.stepBody}>Search by product, brand, service, or location. Browse by category, from baby formula to birthday decorators.</div>
             </div>
             <div className={s.stepCard} style={{ background: "#E8F3EC" }}>
               <div className={s.stepNum} style={{ background: "#2A6B3A" }}>2</div>
               <div className={s.stepTitle}>Read it</div>
-              <div className={s.stepBody}>Every review is from a Nigerian mum with a real experience. Ratings, tags, locations &mdash; everything you need at a glance.</div>
+              <div className={s.stepBody}>Every review is from a mum with a real experience. Ratings, tags, locations. Everything you need at a glance.</div>
             </div>
             <div className={s.stepCard} style={{ background: "#E8EDF8" }}>
               <div className={s.stepNum} style={{ background: "#2A4B8A" }}>3</div>
               <div className={s.stepTitle}>Say it</div>
-              <div className={s.stepBody}>Used something? Write your review. Honest &mdash; good or bad. Your words help the next mum skip the 47 WhatsApp messages.</div>
+              <div className={s.stepBody}>Used something? Write your review. Honest, good or bad. Your words help the next mum skip the 47 WhatsApp messages.</div>
             </div>
           </div>
         </div>
@@ -239,7 +239,7 @@ export default function LandingPage() {
         <div className={s.container}>
           <div className={s.reveal} style={{ textAlign: "center", marginBottom: 36 }}>
             <div className={s.label}>8 categories</div>
-            <h2 className={s.secTitle}>Everything a Nigerian mum needs</h2>
+            <h2 className={s.secTitle}>Everything a mum needs</h2>
           </div>
           <div className={`${s.catsGrid} ${s.reveal}`}>
             {[
@@ -276,8 +276,8 @@ export default function LandingPage() {
           </div>
           <div className={`${s.reviewsGrid} ${s.reveal}`}>
             {[
-              { ini: "AO", ac: "#7B1818", name: "Adaeze O.", loc: "Lagos Island", cat: "Nappies", product: "Pampers Premium Care (Size 3)", text: "Best nappies I have used since my first born. No leaks overnight, my son sleeps peacefully and wakes up dry. Worth every kobo." },
-              { ini: "NE", ac: "#2A4B8A", name: "Ngozi E.", loc: "Abuja", cat: "Paediatricians", product: "Dr. Amaka Osei — Paediatrician", text: "She is patient, explains everything clearly, and does not rush you out of the room. My twins have been seeing her since birth." },
+              { ini: "AO", ac: "#7B1818", name: "Adaeze O.", loc: "Lagos Island", cat: "Nappies", product: "Baby Diapers (Size 3)", text: "Best diapers I have used since my first born. No leaks overnight, my son sleeps peacefully and wakes up dry. Worth every kobo." },
+              { ini: "NE", ac: "#2A4B8A", name: "Ngozi E.", loc: "Abuja", cat: "Paediatric Hospitals", product: "Lagoon Hospital, Victoria Island", text: "The paediatric ward is exceptional. Clean, organised, and the consultants actually take time to explain what is going on. My twins were admitted for three days and I never felt left in the dark." },
               { ini: "FB", ac: "#8A5A00", name: "Funke B.", loc: "Port Harcourt", cat: "Photographers", product: "Snapshots by Tolu", text: "She captured my son\u2019s naming ceremony so beautifully I cried. Professional, patient, and delivered within a week. Book her NOW." },
             ].map((r) => (
               <div key={r.ini} className={`${s.card} ${s.reviewCard}`}>
@@ -319,7 +319,7 @@ export default function LandingPage() {
                 Your reputation,<br />in one place.
               </h2>
               <p style={{ fontSize: 15, color: "rgba(255,255,255,0.72)", lineHeight: 1.75, marginBottom: 24 }}>
-                Nigerian mums are already talking about your cr&egrave;che, your practice, your photography business.
+                Mums are already talking about your cr&egrave;che, your practice, your photography business.
                 MumRated! lets you join the conversation.
               </p>
               <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 28 }}>
@@ -344,7 +344,7 @@ export default function LandingPage() {
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               {[
-                { icon: "🏫", type: "Crèche / School", text: "Be found by Lagos mums searching for nurseries near them." },
+                { icon: "🏫", type: "Crèche / School", text: "Be found by mums searching for nurseries near them." },
                 { icon: "👩‍⚕️", type: "Paediatrician", text: "Build trust before a mum even walks through your door." },
                 { icon: "📸", type: "Baby Photographer", text: "Your next naming ceremony client is on MumRated! right now." },
                 { icon: "🎂", type: "Birthday Vendor", text: "Word of mouth, searchable and permanent." },
@@ -406,7 +406,7 @@ export default function LandingPage() {
             Be part of the movement.
           </h2>
           <p style={{ fontSize: 15, color: "rgba(255,255,255,0.75)", marginBottom: 28, lineHeight: 1.7 }}>
-            Join thousands of Nigerian mums who are already saying it, rating it, and trusting it.
+            Join thousands of mums who are already saying it, rating it, and trusting it.
           </p>
           {joined ? (
             <p style={{ color: "#fff", fontSize: 15, fontWeight: 600, marginBottom: 16 }}>

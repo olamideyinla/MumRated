@@ -139,7 +139,7 @@ export default function ProfileForm({ user }: { user: UserProfile }) {
         const data = await res.json().catch(() => ({}));
         setErrorMsg(
           (data as { error?: string }).error ??
-            "Couldn't save your profile right now — give it another go.",
+            "Couldn't save your profile right now, give it another go.",
         );
         return;
       }
@@ -150,7 +150,7 @@ export default function ProfileForm({ user }: { user: UserProfile }) {
       };
       setIsVerified(updated.isVerified);
       if (updated.photo) setPhotoPreview(updated.photo);
-      setPhotoDataUri(null); // clear the blob — server has the permanent URL now
+      setPhotoDataUri(null); // clear the blob, server has the permanent URL now
       setSuccessMsg(
         updated.isVerified
           ? "Profile saved! You've earned your Verified Mum badge. 🌟"
@@ -271,7 +271,7 @@ export default function ProfileForm({ user }: { user: UserProfile }) {
           ))}
         </select>
         <p className="mt-1 text-xs text-muted">
-          We store this as a band, not a date of birth — your privacy stays intact.
+          We store this as a band, not a date of birth, your privacy stays intact.
         </p>
       </div>
 

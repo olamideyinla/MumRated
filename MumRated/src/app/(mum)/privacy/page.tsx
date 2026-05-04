@@ -1,5 +1,5 @@
 /**
- * /privacy — Privacy Policy (placeholder)
+ * /privacy, Privacy Policy (placeholder)
  *
  * ╔══════════════════════════════════════════════════════════════════╗
  * ║  ⚠️  LEGAL REVIEW REQUIRED BEFORE PUBLIC LAUNCH                  ║
@@ -18,11 +18,11 @@
  * ║     portability, objection                                       ║
  * ║   • Data retention schedules for each data category              ║
  * ║   • Third-party processor agreements (Supabase/Vercel/           ║
- * ║     Cloudinary — all non-Nigerian hosting; cross-border transfer ║
+ * ║     Cloudinary, all non-Nigerian hosting; cross-border transfer ║
  * ║     provisions required)                                         ║
  * ║   • NITDA registration requirement (organisations processing     ║
  * ║     personal data of ≥1,000 Nigerian data subjects per month)    ║
- * ║   • Cookie consent — Analytics and Sentry set cookies            ║
+ * ║   • Cookie consent, Analytics and Sentry set cookies            ║
  * ║   • Breach notification obligations                              ║
  * ║                                                                  ║
  * ║  This file is a HARD BLOCKER in LAUNCH_CHECKLIST.md.            ║
@@ -46,7 +46,7 @@ export default function PrivacyPage() {
       {/* ── Lawyer review banner ──────────────────────────────── */}
       <div className="rounded-card border-2 border-amber-400 bg-amber-50 px-5 py-4">
         <p className="font-bold text-amber-800 text-sm mb-1">
-          ⚠️ Draft — Pending Nigerian commercial lawyer review (NDPR priority)
+          ⚠️ Draft, Pending Nigerian commercial lawyer review (NDPR priority)
         </p>
         <p className="text-amber-700 text-sm leading-relaxed">
           This document is a working draft. NDPR / NDPA compliance review by qualified
@@ -58,14 +58,14 @@ export default function PrivacyPage() {
       <header>
         <h1 className="font-display text-3xl font-bold text-dark">Privacy Policy</h1>
         <p className="text-muted text-sm mt-2">
-          Effective date: [DATE — to be confirmed by counsel] · Last updated: May 2025
+          Effective date: [DATE, to be confirmed by counsel] · Last updated: May 2025
         </p>
       </header>
 
       <section className="space-y-4 text-dark leading-relaxed">
         <h2 className="font-display text-xl font-bold">1. Who this policy applies to</h2>
         <p>
-          This policy applies to all users of mumrated.com — mums who write reviews, visitors
+          This policy applies to all users of mumrated.com, mums who write reviews, visitors
           who read reviews, and businesses who claim listings. It is published to meet our
           obligations under the Nigeria Data Protection Regulation (NDPR) 2019 and the Nigeria
           Data Protection Act 2023 (NDPA).
@@ -81,7 +81,7 @@ export default function PrivacyPage() {
           <li>Display name (optional, chosen by you)</li>
           <li>Profile photo (optional, Cloudinary-hosted)</li>
           <li>City and country (optional)</li>
-          <li>Child&rsquo;s age band — e.g. &ldquo;Toddler&rdquo;, not exact date of birth (optional)</li>
+          <li>Child&rsquo;s age band, e.g. &ldquo;Toddler&rdquo;, not exact date of birth (optional)</li>
           <li>If you sign in with Google: your name and profile photo from Google</li>
         </ul>
 
@@ -150,7 +150,7 @@ export default function PrivacyPage() {
           <li><strong>Rectify</strong> inaccurate data</li>
           <li><strong>Delete</strong> your account and associated data</li>
           <li><strong>Object</strong> to certain processing activities</li>
-          <li><strong>Portability</strong> — request your data in a portable format</li>
+          <li><strong>Portability</strong>, request your data in a portable format</li>
           <li><strong>Withdraw consent</strong> where processing is based on consent</li>
         </ul>
         <p className="text-sm">
@@ -164,7 +164,7 @@ export default function PrivacyPage() {
       <section className="space-y-4 text-dark leading-relaxed">
         <h2 className="font-display text-xl font-bold">6. Data retention</h2>
         <p className="text-sm">
-          [COUNSEL: Insert data retention schedule. Provisional draft below — requires legal review.]
+          [COUNSEL: Insert data retention schedule. Provisional draft below, requires legal review.]
         </p>
         <ul className="list-disc pl-5 space-y-1 text-sm text-muted">
           <li>Account data: retained while account is active + 2 years after deletion request</li>

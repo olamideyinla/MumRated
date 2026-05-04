@@ -51,7 +51,7 @@ function StarSelector({
             type="button"
             role="radio"
             aria-checked={value === star}
-            aria-label={`${star} star${star > 1 ? "s" : ""} — ${labels[star]}`}
+            aria-label={`${star} star${star > 1 ? "s" : ""}, ${labels[star]}`}
             onClick={() => onChange(star)}
             onMouseEnter={() => setHovered(star)}
             className="focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded"
@@ -97,7 +97,7 @@ const PRODUCT_PROMPTS = [
     key: "recommend",
     label: "Would you recommend it to your sister?",
     placeholder:
-      "e.g. Absolutely — I've already sent the link to three mum friends.",
+      "e.g. Absolutely, I've already sent the link to three mum friends.",
   },
 ] as const;
 
@@ -117,7 +117,7 @@ const SERVICE_PROMPTS = [
   {
     key: "bookAgain",
     label: "Would you book again?",
-    placeholder: "e.g. Yes — we've already booked our next appointment.",
+    placeholder: "e.g. Yes, we've already booked our next appointment.",
   },
 ] as const;
 
@@ -315,7 +315,7 @@ function ReviewFormInner({
       try {
         recaptchaToken = await executeRecaptcha("submit_review");
       } catch {
-        // Non-fatal — moderation will handle missing token
+        // Non-fatal, moderation will handle missing token
       }
     }
 
@@ -348,7 +348,7 @@ function ReviewFormInner({
 
       if (!res.ok) {
         setFormError(
-          data.error ?? "Something went wrong — try again in a moment.",
+          data.error ?? "Something went wrong, try again in a moment.",
         );
         return;
       }
@@ -368,12 +368,12 @@ function ReviewFormInner({
           {isPublished ? "🌟" : "📬"}
         </p>
         <h2 className="font-display text-xl font-bold text-dark">
-          {isPublished ? "Your review is live!" : "Thanks — we'll read this shortly"}
+          {isPublished ? "Your review is live!" : "Thanks, we'll read this shortly"}
         </h2>
         <p className="text-sm text-muted leading-relaxed max-w-xs mx-auto">
           {isPublished
             ? "Other Nigerian mums can now read your honest take. Thank you for helping the community."
-            : "We want to make sure every review on MumRated! is fair and trustworthy. We'll publish this once it's been read — usually within 24 hours."}
+            : "We want to make sure every review on MumRated! is fair and trustworthy. We'll publish this once it's been read, usually within 24 hours."}
         </p>
         <button
           onClick={() => router.push(`/listing/${listing.slug}`)}
@@ -443,7 +443,7 @@ function ReviewFormInner({
       <div className="rounded-card bg-bgLight border border-border p-4 space-y-4">
         <p className="text-sm font-semibold text-dark">
           A bit about you{" "}
-          <span className="font-normal text-muted">(optional — helps other mums)</span>
+          <span className="font-normal text-muted">(optional, helps other mums)</span>
         </p>
 
         <div className="grid sm:grid-cols-2 gap-4">
@@ -515,7 +515,7 @@ function ReviewFormInner({
   );
 }
 
-// ── Public export — wraps with reCAPTCHA provider ────────────────────────────
+// ── Public export, wraps with reCAPTCHA provider ────────────────────────────
 
 export default function ReviewForm({
   listing,

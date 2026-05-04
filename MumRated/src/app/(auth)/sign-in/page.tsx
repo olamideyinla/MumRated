@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import SignInForm from "./SignInForm";
 
 export const metadata = {
-  title: "Sign in — MumRated!",
+  title: "Sign in, MumRated!",
 };
 
 export default function SignInPage() {

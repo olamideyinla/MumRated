@@ -7,11 +7,11 @@ import StarRating from "@/components/ui/StarRating";
 import { cldOptimise } from "@/lib/cloudinary";
 
 export const metadata: Metadata = {
-  title: "MumRated! — Best baby products & services in Nigeria, reviewed by mums",
+  title: "MumRated!, Best baby products & services in Nigeria, reviewed by mums",
   description:
-    "Find the best baby products, crèches, paediatricians, and family services in Nigeria. Honest reviews written by Nigerian mums — no ads, no sponsored results.",
+    "Find the best baby products, crèches, paediatricians, and family services in Nigeria. Honest reviews written by Nigerian mums, no ads, no sponsored results.",
   openGraph: {
-    title: "MumRated! — Best baby products & services in Nigeria, reviewed by mums",
+    title: "MumRated!, Best baby products & services in Nigeria, reviewed by mums",
     description:
       "Honest reviews from Nigerian mums. Baby products, crèches, paediatricians, and more.",
     type: "website",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 const APP_URL_HOME = process.env.NEXT_PUBLIC_APP_URL ?? "https://mumrated.com";
 
-// WebSite schema with SearchAction — enables Google's sitelinks search box
+// WebSite schema with SearchAction, enables Google's sitelinks search box
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -40,7 +40,7 @@ const websiteSchema = {
 
 export const revalidate = 300;
 
-// Editorial featured categories — not paid placements
+// Editorial featured categories, not paid placements
 const FEATURED_CATEGORIES = [
   { slug: "nappies-essentials", label: "Nappies & Essentials", icon: "🧷" },
   { slug: "baby-food-nutrition", label: "Baby Food & Nutrition", icon: "🍼" },
@@ -76,7 +76,7 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* WebSite schema with SearchAction — enables Google sitelinks search box */}
+      {/* WebSite schema with SearchAction, enables Google sitelinks search box */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}

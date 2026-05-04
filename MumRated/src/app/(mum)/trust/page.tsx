@@ -1,5 +1,5 @@
 /**
- * /trust — MumRated! Trust & Transparency page
+ * /trust, MumRated! Trust & Transparency page
  *
  * ⚠️  LEGAL REVIEW DEPENDENCY
  * This page must be reviewed and approved by a Nigerian commercial lawyer
@@ -16,17 +16,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "How MumRated! Works — Trust & Transparency | MumRated!",
+  title: "How MumRated! Works, Trust & Transparency | MumRated!",
   description:
     "Honest answers to your questions about who can write reviews, how we handle fake or unfair reviews, and what it means when a business is 'verified' on MumRated!",
   openGraph: {
-    title: "How MumRated! Works — Trust & Transparency",
+    title: "How MumRated! Works, Trust & Transparency",
     description: "The full truth about how reviews work on MumRated!",
     type: "website",
   },
 };
 
-// This page is static — no DB queries, long cache.
+// This page is static, no DB queries, long cache.
 export const revalidate = 86400;
 
 export default function TrustPage() {
@@ -40,7 +40,7 @@ export default function TrustPage() {
         </h1>
         <p className="mt-4 text-muted text-base leading-relaxed">
           We built MumRated! because we wanted a place Nigerian mums could trust. That means being
-          completely open about how everything works — who can write, what we remove,
+          completely open about how everything works, who can write, what we remove,
           and what money can and cannot buy here.
         </p>
       </header>
@@ -54,7 +54,7 @@ export default function TrustPage() {
         </h2>
         <p className="text-dark leading-relaxed">
           Any Nigerian mum (or carer) who has actually used a product or service. That&rsquo;s it.
-          You need to create a free account — we ask for an email address so we can contact you
+          You need to create a free account, we ask for an email address so we can contact you
           if there&rsquo;s a problem with your review.
         </p>
         <p className="text-dark leading-relaxed">
@@ -63,14 +63,14 @@ export default function TrustPage() {
           a Lekki mum with a toddler is more useful than a nameless &ldquo;it was nice.&rdquo;
         </p>
         <p className="text-dark leading-relaxed">
-          You can choose to post anonymously if you&rsquo;d prefer — your name won&rsquo;t appear,
+          You can choose to post anonymously if you&rsquo;d prefer, your name won&rsquo;t appear,
           but your account still exists behind the scenes. We do this because some sensitive
           reviews (medical, school-related) might affect a mum&rsquo;s relationship with a provider
           if they were easily traced.
         </p>
         <div className="rounded-card bg-bgLight border border-border px-4 py-3 text-sm text-dark">
           <strong>One review per listing, per mum.</strong> We don&rsquo;t allow the same person
-          to write multiple reviews for the same product or service — not even from different accounts.
+          to write multiple reviews for the same product or service, not even from different accounts.
         </div>
       </section>
 
@@ -85,7 +85,7 @@ export default function TrustPage() {
           would embarrass your mother (and ours). Most genuine reviews pass instantly.
         </p>
         <p className="text-dark leading-relaxed">
-          Reviews that trigger a flag are held in a &ldquo;pending review&rdquo; state — they
+          Reviews that trigger a flag are held in a &ldquo;pending review&rdquo; state, they
           remain visible while the MumRated! team reads them. If a review is fine, it&rsquo;s
           cleared. If it breaks the rules below, it&rsquo;s removed.
         </p>
@@ -98,7 +98,7 @@ export default function TrustPage() {
       {/* ── Section 3: What gets removed ────────────────────── */}
       <section className="space-y-3">
         <h2 className="font-display text-xl font-bold text-dark">
-          3. What gets removed — and why
+          3. What gets removed, and why
         </h2>
         <p className="text-dark leading-relaxed">
           We remove a review only when it falls into one of these categories:
@@ -108,8 +108,8 @@ export default function TrustPage() {
             ["Fake reviews", "Posted by someone who clearly never used the product or service, or posted by someone affiliated with the business. We look at account patterns, review timing, and language."],
             ["Hate speech or discrimination", "Anything targeting ethnicity, religion, gender, disability, or any other protected characteristic."],
             ["Dangerous medical claims", "A review that advises mums to stop medication, use an unproven treatment, or make a clinical decision. We flag these and ask the reviewer to rephrase."],
-            ["Personal information", "If a review includes someone's home address, phone number, or other private information — especially about a third party."],
-            ["Legal orders", "We comply with valid Nigerian court orders. We will not remove content simply because a business threatens legal action — only a court order triggers mandatory removal."],
+            ["Personal information", "If a review includes someone's home address, phone number, or other private information, especially about a third party."],
+            ["Legal orders", "We comply with valid Nigerian court orders. We will not remove content simply because a business threatens legal action, only a court order triggers mandatory removal."],
             ["Clear spam", "Reviews that are clearly promotional content, link farming, or competitor sabotage."],
           ].map(([title, desc]) => (
             <li key={title} className="card-sm px-4 py-3">
@@ -131,13 +131,13 @@ export default function TrustPage() {
           4. How listings work
         </h2>
         <p className="text-dark leading-relaxed">
-          Any product or service a mum wants to review can appear on MumRated! — we don&rsquo;t
+          Any product or service a mum wants to review can appear on MumRated!, we don&rsquo;t
           require businesses to sign up or pay anything. Mums suggest listings; our team
           adds them within 48 hours.
         </p>
         <p className="text-dark leading-relaxed">
           The order you see products and services in is determined entirely by the reviews
-          themselves — average rating, number of reviews, and how recent they are.
+          themselves, average rating, number of reviews, and how recent they are.
           Nothing else.
         </p>
         <div className="rounded-card bg-bgLight border border-border px-4 py-3 text-sm text-dark">
@@ -149,7 +149,7 @@ export default function TrustPage() {
       {/* ── Section 5: What claiming means ──────────────────── */}
       <section className="space-y-3">
         <h2 className="font-display text-xl font-bold text-dark">
-          5. What &ldquo;Verified&rdquo; means — and what it doesn&rsquo;t
+          5. What &ldquo;Verified&rdquo; means, and what it doesn&rsquo;t
         </h2>
         <p className="text-dark leading-relaxed">
           Businesses can pay a small annual fee to &ldquo;claim&rdquo; their listing on MumRated!
@@ -170,7 +170,7 @@ export default function TrustPage() {
           <li>That negative reviews will be removed at the business&rsquo;s request</li>
         </ul>
         <p className="text-dark leading-relaxed">
-          Claimed businesses can respond to reviews — you&rsquo;ll see their replies clearly
+          Claimed businesses can respond to reviews, you&rsquo;ll see their replies clearly
           labelled &ldquo;Provider response&rdquo; below the original review. Providers cannot
           edit reviews. They cannot delete reviews. Only MumRated!&rsquo;s moderation team can
           do that.
@@ -183,7 +183,7 @@ export default function TrustPage() {
           6. What we will never sell
         </h2>
         <p className="text-dark leading-relaxed">
-          This is the list of things that are permanently off the table — no matter how much
+          This is the list of things that are permanently off the table, no matter how much
           money is involved. We are writing this publicly so you can hold us to it.
         </p>
         <div className="space-y-2">
@@ -233,7 +233,7 @@ export default function TrustPage() {
       <footer className="text-xs text-muted space-y-1">
         <p>Last updated: May 2025. This page is reviewed every 6 months.</p>
         <p className="font-semibold text-dark">
-          {/* LEGAL REVIEW DEPENDENCY — see file header */}
+          {/* LEGAL REVIEW DEPENDENCY, see file header */}
           ⚠️ This page is pending review by a Nigerian commercial lawyer before public launch.
         </p>
       </footer>

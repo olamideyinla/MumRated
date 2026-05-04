@@ -42,7 +42,7 @@ export default function SignInForm() {
       return;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setEmailError("That doesn't look quite right — double-check the email address.");
+      setEmailError("That doesn't look quite right, double-check the email address.");
       return;
     }
     setEmailError("");
@@ -54,7 +54,7 @@ export default function SignInForm() {
       });
       if (res?.error) {
         setEmailError(
-          "Couldn't send the link right now — try Google above, or try again in a moment.",
+          "Couldn't send the link right now, try Google above, or try again in a moment.",
         );
       } else {
         setSent(true);
@@ -87,7 +87,7 @@ export default function SignInForm() {
             </div>
           )}
 
-          {/* Google — primary */}
+          {/* Google, primary */}
           <button
             onClick={handleGoogleSignIn}
             disabled={isPending}
@@ -112,7 +112,7 @@ export default function SignInForm() {
             <div className="rounded-card bg-[#F0F7F2] border border-[#A8D5B5] px-4 py-4 text-center space-y-1">
               <p className="text-sm font-semibold text-[#2A6B3A]">Check your inbox ✓</p>
               <p className="text-xs text-[#3B6B4A]">
-                We sent a magic link to <strong className="font-medium">{email}</strong>. Click it to sign in — expires in 10 minutes.
+                We sent a magic link to <strong className="font-medium">{email}</strong>. Click it to sign in, expires in 10 minutes.
               </p>
               <button
                 onClick={() => { setSent(false); setEmail(""); }}

@@ -18,11 +18,11 @@ export const revalidate = 86400;
 const benefits = [
   {
     title: "Respond to reviews",
-    body: "A claimed listing lets you reply publicly to any review — good or critical. Mums notice providers who engage honestly and take feedback seriously.",
+    body: "A claimed listing lets you reply publicly to any review, good or critical. Mums notice providers who engage honestly and take feedback seriously.",
   },
   {
     title: "Verified badge",
-    body: "Verification confirms your business identity. It signals to mums that you're a real, accountable provider — not a ghost listing.",
+    body: "Verification confirms your business identity. It signals to mums that you're a real, accountable provider, not a ghost listing.",
   },
   {
     title: "Keep your profile current",
@@ -30,13 +30,13 @@ const benefits = [
   },
   {
     title: "Understand your reputation",
-    body: "See your average rating, review trends, and what mums say about you most. No analytics dashboard exists yet — that's Tier 2 — but your reviews tell the story.",
+    body: "See your average rating, review trends, and what mums say about you most. No analytics dashboard exists yet, that's Tier 2, but your reviews tell the story.",
   },
 ];
 
 const principles = [
   {
-    label: "Listings are free — always",
+    label: "Listings are free, always",
     detail:
       "Any product or service that serves mums and families can be listed on MumRated! at no cost. We will never charge for a listing to exist.",
   },
@@ -53,7 +53,7 @@ const principles = [
   {
     label: "Verification does not equal endorsement",
     detail:
-      "Claiming and verifying your listing confirms your identity. It does not mean MumRated! endorses the quality of your product or service — that is what the ratings are for.",
+      "Claiming and verifying your listing confirms your identity. It does not mean MumRated! endorses the quality of your product or service, that is what the ratings are for.",
   },
 ];
 
@@ -69,7 +69,7 @@ export default function ProvidersPage() {
         <p className="mt-4 text-muted text-base leading-relaxed">
           Thousands of mums use MumRated! to decide which products to buy and
           which services to trust with their children. If you serve families,
-          your listing is already here — or it can be. Claiming it is free.
+          your listing is already here, or it can be. Claiming it is free.
         </p>
       </header>
 
@@ -81,13 +81,13 @@ export default function ProvidersPage() {
           How listings work
         </h2>
         <p className="text-sm text-muted leading-relaxed">
-          Any mum can add a product or service to MumRated! and review it —
+          Any mum can add a product or service to MumRated! and review it , 
           even if the provider has never heard of us. Listings are created by
           the community and belong to the community.
         </p>
         <p className="text-sm text-muted leading-relaxed">
           If your business is already listed, you can claim it. If it is not,
-          you can add it yourself — or ask us to add it by getting in touch.
+          you can add it yourself, or ask us to add it by getting in touch.
         </p>
         <div className="rounded-card bg-bgLight border border-border px-5 py-4 space-y-2">
           <p className="font-display font-bold text-dark text-sm">
@@ -160,7 +160,7 @@ export default function ProvidersPage() {
           What does it cost?
         </h2>
         <p className="text-sm text-muted leading-relaxed">
-          Claiming and verifying your listing is paid — this covers the cost of
+          Claiming and verifying your listing is paid, this covers the cost of
           identity verification and keeps the platform free for mums. Listing
           itself (unclaimed) is always free, and mums can review any listing at
           any time regardless of whether you&apos;ve claimed it.

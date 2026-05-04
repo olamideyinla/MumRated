@@ -72,7 +72,7 @@ export default function ReportModal({ reviewId, isAuthenticated }: Props) {
       if (res.ok) {
         setSubmitted(true);
       } else {
-        setError("Couldn't send your report right now — try again in a moment.");
+        setError("Couldn't send your report right now, try again in a moment.");
       }
     });
   }
@@ -156,7 +156,7 @@ export default function ReportModal({ reviewId, isAuthenticated }: Props) {
                 ))}
               </fieldset>
 
-              {/* Optional detail — only when "Other" or "Inaccurate" */}
+              {/* Optional detail, only when "Other" or "Inaccurate" */}
               {(reason === "Other" || reason === "Inaccurate information") && (
                 <div>
                   <label className="label" htmlFor="report-details">

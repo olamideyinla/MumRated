@@ -10,7 +10,7 @@ export default async function NavBar() {
     <header className="sticky top-0 z-40 border-b border-border bg-card/95 backdrop-blur-sm">
       <div className="container flex h-14 items-center justify-between">
         {/* Logo */}
-        <Link href="/home" className="flex items-center gap-2" aria-label="MumRated! — home">
+        <Link href="/home" className="flex items-center gap-2" aria-label="MumRated!, home">
           <Image
             src="/logo-stamp.png"
             alt="MumRated! logo"
@@ -25,7 +25,7 @@ export default async function NavBar() {
           </span>
         </Link>
 
-        {/* Centre nav links — hidden on mobile */}
+        {/* Centre nav links, hidden on mobile */}
         <nav className="hidden md:flex items-center gap-6 text-sm">
           <Link href="/how-it-works" className="nav-link">
             How it Works
@@ -41,7 +41,7 @@ export default async function NavBar() {
           </Link>
         </nav>
 
-        {/* Right side — auth state */}
+        {/* Right side, auth state */}
         <NavBarClient session={session} />
       </div>
     </header>

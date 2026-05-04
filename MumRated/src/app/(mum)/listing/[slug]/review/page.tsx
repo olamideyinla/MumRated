@@ -15,13 +15,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     select: { name: true },
   });
   return {
-    title: listing ? `Review ${listing.name} — MumRated!` : "Write a review — MumRated!",
+    title: listing ? `Review ${listing.name}, MumRated!` : "Write a review, MumRated!",
     robots: { index: false },
   };
 }
 
 export default async function ReviewPage({ params }: Props) {
-  // Auth guard — middleware covers this but double-check server-side
+  // Auth guard, middleware covers this but double-check server-side
   const session = await auth();
   if (!session?.user?.id) {
     redirect(`/sign-in?callbackUrl=/listing/${params.slug}/review`);
@@ -73,7 +73,7 @@ export default async function ReviewPage({ params }: Props) {
           {listing.name}
         </h1>
         <p className="mt-1 text-sm text-muted">
-          Share your honest experience — no sponsored content, no brand partnerships.
+          Share your honest experience, no sponsored content, no brand partnerships.
         </p>
       </div>
 

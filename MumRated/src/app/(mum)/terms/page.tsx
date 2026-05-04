@@ -1,5 +1,5 @@
 /**
- * /terms — Terms of Use (placeholder)
+ * /terms, Terms of Use (placeholder)
  *
  * ╔══════════════════════════════════════════════════════════════════╗
  * ║  ⚠️  LEGAL REVIEW REQUIRED BEFORE PUBLIC LAUNCH                  ║
@@ -12,7 +12,7 @@
  * ║   • User-generated content ownership and licensing               ║
  * ║   • Liability limitation for review accuracy                     ║
  * ║   • NDPR (Nigeria Data Protection Regulation) compliance         ║
- * ║   • Governing law — Nigerian Federal jurisdiction                ║
+ * ║   • Governing law, Nigerian Federal jurisdiction                ║
  * ║   • Provider subscription terms and refund policy                ║
  * ║   • Dispute resolution mechanism                                 ║
  * ║                                                                  ║
@@ -25,7 +25,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Terms of Use | MumRated!",
-  description: "MumRated! Terms of Use — the rules for using our platform.",
+  description: "MumRated! Terms of Use, the rules for using our platform.",
   robots: { index: false }, // don't index until lawyer-reviewed
 };
 
@@ -37,7 +37,7 @@ export default function TermsPage() {
       {/* ── Lawyer review banner ──────────────────────────────── */}
       <div className="rounded-card border-2 border-amber-400 bg-amber-50 px-5 py-4">
         <p className="font-bold text-amber-800 text-sm mb-1">
-          ⚠️ Draft — Pending Nigerian commercial lawyer review
+          ⚠️ Draft, Pending Nigerian commercial lawyer review
         </p>
         <p className="text-amber-700 text-sm leading-relaxed">
           This document is a working draft and has not yet been reviewed by legal counsel.
@@ -51,7 +51,7 @@ export default function TermsPage() {
       <header>
         <h1 className="font-display text-3xl font-bold text-dark">Terms of Use</h1>
         <p className="text-muted text-sm mt-2">
-          Effective date: [DATE — to be confirmed by counsel] · Last updated: May 2025
+          Effective date: [DATE, to be confirmed by counsel] · Last updated: May 2025
         </p>
       </header>
 

@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import s from "./landing.module.css";
 
-// Note: metadata export is ignored in client components — SEO is handled by
+// Note: metadata export is ignored in client components, SEO is handled by
 // the root layout default metadata which already covers the home/landing page.
 
 export default function LandingPage() {
@@ -48,10 +48,10 @@ export default function LandingPage() {
         if (res.ok) {
           setJoined(true);
         } else {
-          setJoinError("Something went wrong — please try again.");
+          setJoinError("Something went wrong, please try again.");
         }
       } catch {
-        setJoinError("Something went wrong — please try again.");
+        setJoinError("Something went wrong, please try again.");
       }
     });
   }
@@ -337,8 +337,8 @@ export default function LandingPage() {
             Built by mums. Powered by mums.
           </h2>
           <p style={{ fontSize: 16, color: "var(--mid)", lineHeight: 1.85, marginBottom: 20 }}>
-            MumRated is mum-led from top to bottom. Founders, moderators, community managers, content team
-            — every role filled by a mum who has lived the problem we are solving.
+            MumRated is mum-led from top to bottom. Founders, moderators, community managers, content team,
+            every role filled by a mum who has lived the problem we are solving.
           </p>
           <p style={{ fontSize: 17, color: "var(--dark)", lineHeight: 1.75, fontStyle: "italic", fontFamily: "var(--font-playfair,'Playfair Display',serif)", fontWeight: 700 }}>
             We are not building this for mums. We are the mums building it.
@@ -363,9 +363,9 @@ export default function LandingPage() {
               </p>
               <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 28 }}>
                 {[
-                  "Free listing — mums can always find and review you",
-                  "Claimed listing — respond to reviews, update your profile",
-                  "Verified badge — build trust with MumRated! verification",
+                  "Free listing, mums can always find and review you",
+                  "Claimed listing, respond to reviews, update your profile",
+                  "Verified badge, build trust with MumRated! verification",
                 ].map((feat) => (
                   <div key={feat} className={s.featureRow}>
                     <div className={s.featureCheck}>

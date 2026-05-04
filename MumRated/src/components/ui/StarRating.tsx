@@ -1,4 +1,4 @@
-// Server component — renders 1-5 star rating as SVG icons
+// Server component, renders 1-5 star rating as SVG icons
 
 interface Props {
   rating: number; // 0–5, supports decimals (e.g. 4.7)

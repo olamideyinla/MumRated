@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import ProfileForm from "./ProfileForm";
 
-export const metadata = { title: "My Profile — MumRated!" };
+export const metadata = { title: "My Profile, MumRated!" };
 
 export default async function ProfilePage() {
   const session = await auth();

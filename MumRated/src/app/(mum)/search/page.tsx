@@ -10,7 +10,7 @@ interface Props {
 export function generateMetadata({ searchParams }: Props): Metadata {
   const q = searchParams.q?.trim();
   return {
-    title: q ? `"${q}" — MumRated!` : "Search — MumRated!",
+    title: q ? `"${q}", MumRated!` : "Search, MumRated!",
     description: q
       ? `Nigerian mum reviews for "${q}".`
       : "Search baby products and services reviewed by Nigerian mums.",
@@ -18,7 +18,7 @@ export function generateMetadata({ searchParams }: Props): Metadata {
   };
 }
 
-// Search results are never cached — always fresh
+// Search results are never cached, always fresh
 export const revalidate = 0;
 
 export default async function SearchPage({ searchParams }: Props) {
@@ -55,7 +55,7 @@ export default async function SearchPage({ searchParams }: Props) {
               : `No results for "${q}"`}
           </h1>
           <p className="text-sm text-muted mb-6">
-            Ranked by relevance and review count — not by any commercial status.
+            Ranked by relevance and review count, not by any commercial status.
           </p>
 
           {results.length > 0 ? (

@@ -46,11 +46,11 @@ export default function ListingCard({ listing }: Props) {
             </span>
           </div>
         )}
-        {/* Verified badge — identity verified, not an endorsement */}
+        {/* Verified badge, identity verified, not an endorsement */}
         {claimStatus === "CLAIMED" && (
           <span
             className="absolute top-2 right-2 rounded-pill bg-verified px-2 py-0.5 text-[10px] font-bold text-white"
-            title="Identity verified — not an endorsement"
+            title="Identity verified, not an endorsement"
           >
             ✓ Verified
           </span>

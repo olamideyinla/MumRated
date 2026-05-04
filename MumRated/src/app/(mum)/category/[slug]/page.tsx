@@ -17,12 +17,12 @@ const APP_URL_CAT = process.env.NEXT_PUBLIC_APP_URL ?? "https://mumrated.com";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const cat = await getCategoryBySlug(params.slug);
-  if (!cat) return { title: "Category not found — MumRated!" };
+  if (!cat) return { title: "Category not found, MumRated!" };
   return {
-    title: `Best ${cat.name} in Nigeria — reviewed by mums | MumRated!`,
+    title: `Best ${cat.name} in Nigeria, reviewed by mums | MumRated!`,
     description: `Read honest reviews of ${cat.name.toLowerCase()} in Nigeria, written by real mums. Find the best rated ${cat.name.toLowerCase()} on MumRated.`,
     openGraph: {
-      title: `Best ${cat.name} in Nigeria — MumRated!`,
+      title: `Best ${cat.name} in Nigeria, MumRated!`,
       description: `Nigerian mums share their honest reviews of ${cat.name.toLowerCase()}. See ratings, tips, and real experiences.`,
       type: "website",
       url: `${APP_URL_CAT}/category/${params.slug}`,
@@ -94,7 +94,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
           </p>
         </div>
 
-        {/* Sort — only review-data-based options */}
+        {/* Sort, only review-data-based options */}
         <div className="flex items-center gap-2 flex-wrap">
           <span className="text-xs text-muted">Sort by</span>
           {SORT_OPTIONS.map((opt) => (

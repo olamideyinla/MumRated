@@ -4,11 +4,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About Us | MumRated!",
   description:
-    "MumRated! is a reviews platform built for mums — honest, experience-based ratings on baby products and family services. Learn who we are and why we built this.",
+    "MumRated! is a reviews platform built for mums, honest, experience-based ratings on baby products and family services. Learn who we are and why we built this.",
   openGraph: {
     title: "About Us | MumRated!",
     description:
-      "MumRated! — honest reviews from real mums, for every family.",
+      "MumRated!, honest reviews from real mums, for every family.",
     type: "website",
   },
 };
@@ -18,7 +18,7 @@ export const revalidate = 86400;
 const values = [
   {
     title: "Honesty over harmony",
-    body: "A 2-star review is as valuable as a 5-star one. We don't suppress negative feedback — we surface it clearly so mums can make informed decisions.",
+    body: "A 2-star review is as valuable as a 5-star one. We don't suppress negative feedback, we surface it clearly so mums can make informed decisions.",
   },
   {
     title: "Mums come first",
@@ -26,11 +26,11 @@ const values = [
   },
   {
     title: "Trust is the product",
-    body: "We earn no revenue from ranking or visibility. Our only sustainable model is building a platform mums trust so completely that they return — and tell other mums.",
+    body: "We earn no revenue from ranking or visibility. Our only sustainable model is building a platform mums trust so completely that they return, and tell other mums.",
   },
   {
     title: "Built for where you are",
-    body: "MumRated! was designed for families in Africa first — not adapted from a Western template. That means local brands, local services, local pricing context, and local voices at the centre.",
+    body: "MumRated! was designed for families in Africa first, not adapted from a Western template. That means local brands, local services, local pricing context, and local voices at the centre.",
   },
 ];
 
@@ -56,7 +56,7 @@ export default function AboutPage() {
           Why we built this
         </h2>
         <p className="text-sm text-muted leading-relaxed">
-          When you&apos;re a new mum, every decision feels high-stakes — which
+          When you&apos;re a new mum, every decision feels high-stakes, which
           formula to try, which cr&egrave;che to trust with your baby, which
           paediatrician actually listens. And yet the information you need most
           is scattered across WhatsApp groups, buried in comment threads, or
@@ -65,7 +65,7 @@ export default function AboutPage() {
         <p className="text-sm text-muted leading-relaxed">
           MumRated! was built to fix that. We wanted one place where mums could
           find honest, experience-based reviews on the products and services
-          that matter most to their families — written by people who&apos;ve
+          that matter most to their families, written by people who&apos;ve
           actually been there.
         </p>
         <p className="text-sm text-muted leading-relaxed">
@@ -84,7 +84,7 @@ export default function AboutPage() {
         </h2>
         <p className="text-sm text-muted leading-relaxed">
           From nappies to cr&egrave;ches, baby formula to birthday party
-          planners — if it&apos;s relevant to a mum&apos;s life with her child,
+          planners, if it&apos;s relevant to a mum&apos;s life with her child,
           it belongs on MumRated!.
         </p>
         <div className="grid sm:grid-cols-2 gap-3">
@@ -167,7 +167,7 @@ export default function AboutPage() {
         </h2>
         <p className="text-sm text-muted leading-relaxed">
           We&apos;re a small team and we read every message. Whether you have a
-          question, a suggestion, a complaint, or just want to say hello —
+          question, a suggestion, a complaint, or just want to say hello , 
           we&apos;d love to hear from you.
         </p>
         <div className="rounded-card bg-bgLight border border-border px-5 py-4 space-y-2 text-sm">

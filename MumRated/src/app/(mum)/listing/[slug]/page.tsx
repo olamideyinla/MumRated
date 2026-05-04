@@ -35,18 +35,18 @@ const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://mumrated.com";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const listing = await getListingBySlug(params.slug);
-  if (!listing) return { title: "Not found — MumRated!" };
+  if (!listing) return { title: "Not found, MumRated!" };
 
   const avg = listing.stats?.avgRating ?? 0;
   const count = listing.stats?.reviewCount ?? 0;
 
   // Title tuned for Nigerian search intent
   const ratingLabel = avg > 0 ? `${avg.toFixed(1)}★ · ` : "";
-  const title = `${listing.name} reviews — Nigerian mums share their experience | MumRated!`;
+  const title = `${listing.name} reviews, Nigerian mums share their experience | MumRated!`;
   const desc = count > 0
     ? `${ratingLabel}${count} honest review${count !== 1 ? "s" : ""} of ${listing.name} from Nigerian mums. ${listing.description ?? ""}`.trim()
     : listing.description
-      ? `${listing.description} — Read Nigerian mum reviews on MumRated.`
+      ? `${listing.description}, Read Nigerian mum reviews on MumRated.`
       : `Read Nigerian mum reviews of ${listing.name} on MumRated.`;
 
   // Use Cloudinary 1200×630 crop for WhatsApp/Facebook/X link previews
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `${APP_URL}/listing/${params.slug}`,
     },
     openGraph: {
-      title: `${listing.name} — ${avg > 0 ? `${avg.toFixed(1)}★` : "Reviews"} | MumRated!`,
+      title: `${listing.name}, ${avg > 0 ? `${avg.toFixed(1)}★` : "Reviews"} | MumRated!`,
       description: desc.slice(0, 160),
       type: "website",
       url: `${APP_URL}/listing/${params.slug}`,
@@ -71,7 +71,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${listing.name} — MumRated!`,
+      title: `${listing.name}, MumRated!`,
       description: desc.slice(0, 160),
       images: ogImageUrl ? [ogImageUrl] : [],
     },
@@ -147,7 +147,7 @@ export default async function ListingPage({ params, searchParams }: Props) {
   const reviewCount = stats?.reviewCount ?? 0;
   const starDist = computeStarDistribution(reviews);
   const listingUrl = `${APP_URL}/listing/${params.slug}`;
-  const whatsappText = `Check out ${name} on MumRated! — ${reviewCount > 0 ? `${avgRating.toFixed(1)}★ from ${reviewCount} mum review${reviewCount !== 1 ? "s" : ""}` : "Be the first to review"}. ${listingUrl}`;
+  const whatsappText = `Check out ${name} on MumRated!, ${reviewCount > 0 ? `${avgRating.toFixed(1)}★ from ${reviewCount} mum review${reviewCount !== 1 ? "s" : ""}` : "Be the first to review"}. ${listingUrl}`;
 
   // BreadcrumbList structured data
   const breadcrumbSchema = {
@@ -259,7 +259,7 @@ export default async function ListingPage({ params, searchParams }: Props) {
                   {claimStatus === "CLAIMED" && (
                     <span
                       className="rounded-pill border border-verified/40 bg-verified/10 px-2 py-0.5 text-xs font-semibold text-verified cursor-help"
-                      title="Identity verified — not an endorsement. Rankings are determined by mum reviews only."
+                      title="Identity verified, not an endorsement. Rankings are determined by mum reviews only."
                       tabIndex={0}
                     >
                       ✓ Verified
@@ -272,7 +272,7 @@ export default async function ListingPage({ params, searchParams }: Props) {
                 )}
               </div>
 
-              {/* WhatsApp share — listing level */}
+              {/* WhatsApp share, listing level */}
               <WhatsAppShare text={whatsappText} label="Share" className="flex-shrink-0" />
             </div>
 
@@ -285,7 +285,7 @@ export default async function ListingPage({ params, searchParams }: Props) {
                 </span>
               </div>
             ) : (
-              <p className="mt-4 text-sm text-muted italic">No reviews yet — be the first!</p>
+              <p className="mt-4 text-sm text-muted italic">No reviews yet, be the first!</p>
             )}
 
             {/* Details grid */}
@@ -305,7 +305,7 @@ export default async function ListingPage({ params, searchParams }: Props) {
                   </p>
                   <p className="text-dark font-semibold">{priceRangeNGN}</p>
                   <p className="text-xs text-muted mt-0.5">
-                    Currency fluctuates — verify current prices before buying.
+                    Currency fluctuates, verify current prices before buying.
                   </p>
                 </div>
               )}
@@ -416,7 +416,7 @@ export default async function ListingPage({ params, searchParams }: Props) {
                   .slice(0, 2)
                   .toUpperCase();
                 const reviewUrl = `${APP_URL}/listing/${params.slug}`;
-                const reviewWhatsappText = `"${review.text.slice(0, 100)}${review.text.length > 100 ? "…" : ""}" — ${reviewerName} on MumRated! ${reviewUrl}`;
+                const reviewWhatsappText = `"${review.text.slice(0, 100)}${review.text.length > 100 ? "…" : ""}", ${reviewerName} on MumRated! ${reviewUrl}`;
 
                 return (
                   <article
@@ -518,7 +518,7 @@ export default async function ListingPage({ params, searchParams }: Props) {
                       />
                     </div>
 
-                    {/* Provider reply — shown below the review, never above */}
+                    {/* Provider reply, shown below the review, never above */}
                     {review.providerReply && (
                       <div className="mt-1 rounded-lg bg-bgLight border border-border px-4 py-3">
                         <p className="text-xs font-semibold text-crimson mb-1">

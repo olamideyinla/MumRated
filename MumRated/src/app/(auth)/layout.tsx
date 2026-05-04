@@ -1,4 +1,4 @@
-// Auth pages (sign-in, check-email) — no NavBar, plain background
+// Auth pages (sign-in, check-email), no NavBar, plain background
 export default function AuthLayout({
   children,
 }: {

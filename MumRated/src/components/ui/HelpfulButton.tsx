@@ -48,11 +48,11 @@ export default function HelpfulButton({
         setCount(data.helpfulCount ?? initialCount);
         setVoted(res.status === 409 && data.error === "already_voted");
       } else {
-        // Server confirmed — use the authoritative count
+        // Server confirmed, use the authoritative count
         if (data.helpfulCount !== undefined) setCount(data.helpfulCount);
       }
     } catch {
-      // Network error — revert
+      // Network error, revert
       setCount(initialCount);
       setVoted(false);
     } finally {

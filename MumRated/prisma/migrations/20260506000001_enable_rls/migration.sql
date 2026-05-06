@@ -18,6 +18,12 @@
 -- ============================================================================
 
 
+-- ── 0. Prisma internal table — FULLY LOCKED ──────────────────────────────
+-- _prisma_migrations tracks applied migrations. No external access needed.
+
+ALTER TABLE "_prisma_migrations" ENABLE ROW LEVEL SECURITY;
+
+
 -- ── 1. Auth.js credential tables — FULLY LOCKED ──────────────────────────
 -- These tables store OAuth tokens, session tokens, and magic-link tokens.
 -- No external client should ever touch them directly.

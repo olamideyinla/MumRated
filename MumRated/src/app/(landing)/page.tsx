@@ -123,7 +123,7 @@ export default function LandingPage() {
         <div className={s.container}>
           <div className={s.heroGrid}>
             <div className={s.reveal}>
-              <div className={s.label}>Nigeria&rsquo;s #1 Mum Review Platform</div>
+              <div className={s.label}>Nigeria’s #1 Mum Review Platform</div>
               <h1 className={s.heroTitle}>
                 The reviews<br />mums<br /><em>actually trust.</em>
               </h1>
@@ -189,7 +189,7 @@ export default function LandingPage() {
             <div>
               <div className={s.label}>The problem</div>
               <h2 className={s.secTitle} style={{ marginBottom: 16 }}>
-                Finding a cr&egrave;che shouldn&rsquo;t take 47 WhatsApp messages.
+                Finding a cr&egrave;che shouldn’t take 47 WhatsApp messages.
               </h2>
               <p style={{ fontSize: 15, color: "var(--mid)", lineHeight: 1.75, marginBottom: 14 }}>
                 Every mum starts from zero. Every time. The same cr&egrave;che question gets asked every week
@@ -207,11 +207,11 @@ export default function LandingPage() {
               </div>
               <div className={s.problemCard} style={{ background: "#F0E8E8", borderColor: "#8B1A1A44" }}>
                 <div className={s.problemCardTitle} style={{ color: "#8B1A1A" }}>Instagram influencers</div>
-                <div className={s.problemCardSub}>&ldquo;Gifted by the brand&rdquo; in tiny text. Trust is collapsing.</div>
+                <div className={s.problemCardSub}>“Gifted by the brand” in tiny text. Trust is collapsing.</div>
               </div>
               <div className={s.problemCard} style={{ background: "#E8E8F0", borderColor: "#2A4B8A44" }}>
                 <div className={s.problemCardTitle} style={{ color: "#2A4B8A" }}>Marketplace ratings</div>
-                <div className={s.problemCardSub}>Products only. Services don&rsquo;t exist. Often empty or gamed.</div>
+                <div className={s.problemCardSub}>Products only. Services don’t exist. Often empty or gamed.</div>
               </div>
               <div className={s.problemCard} style={{ background: "#FBF0E8", borderColor: "#7B181844" }}>
                 <div className={s.problemCardTitle} style={{ color: "#7B1818" }}>MumRated! ✓</div>
@@ -313,7 +313,7 @@ export default function LandingPage() {
                 <div style={{ fontFamily: "var(--font-playfair, 'Playfair Display', serif)", fontWeight: 700, fontSize: 14, color: "var(--dark)", marginBottom: 8 }}>
                   {r.product}
                 </div>
-                <p style={{ fontSize: 13, color: "var(--mid)", lineHeight: 1.65 }}>&ldquo;{r.text}&rdquo;</p>
+                <p style={{ fontSize: 13, color: "var(--mid)", lineHeight: 1.65 }}>“{r.text}”</p>
                 <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 12 }}>
                   <span style={{ fontSize: 11, color: "var(--muted)" }}>{r.date}</span>
                   <span style={{ fontSize: 11, fontWeight: 700, color: "#2A6B3A", background: "#E8F3EC", borderRadius: 20, padding: "2px 8px" }}>✓ Verified Mum</span>
@@ -420,7 +420,7 @@ export default function LandingPage() {
           </p>
           {joined ? (
             <p style={{ color: "#fff", fontSize: 15, fontWeight: 600, marginBottom: 16 }}>
-              You&rsquo;re in! Check your inbox for a welcome email. ✓
+              You’re in! Check your inbox for a welcome email. ✓
             </p>
           ) : (
             <>

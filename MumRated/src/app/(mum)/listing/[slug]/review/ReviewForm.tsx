@@ -448,7 +448,7 @@ function ReviewFormInner({
 
         <div className="grid sm:grid-cols-2 gap-4">
           <div>
-            <label className="label" htmlFor="childAgeBand">My child&rsquo;s age</label>
+            <label className="label" htmlFor="childAgeBand">My child’s age</label>
             <select
               id="childAgeBand"
               value={childAgeBand}
@@ -487,7 +487,7 @@ function ReviewFormInner({
         />
         <span className="text-sm text-dark">
           Post anonymously{" "}
-          <span className="text-muted">(your name won&rsquo;t be shown)</span>
+          <span className="text-muted">(your name won’t be shown)</span>
         </span>
       </label>
 

@@ -81,14 +81,14 @@ export default function PrivacyPage() {
           <li>Display name (optional, chosen by you)</li>
           <li>Profile photo (optional, Cloudinary-hosted)</li>
           <li>City and country (optional)</li>
-          <li>Child&rsquo;s age band, e.g. &ldquo;Toddler&rdquo;, not exact date of birth (optional)</li>
+          <li>Child’s age band, e.g. “Toddler”, not exact date of birth (optional)</li>
           <li>If you sign in with Google: your name and profile photo from Google</li>
         </ul>
 
         <h3 className="font-semibold text-dark mt-4">When you write a review:</h3>
         <ul className="list-disc pl-5 space-y-1 text-sm">
           <li>Review text and star rating</li>
-          <li>Optional structured answers (e.g. &ldquo;Would you buy again?&rdquo;)</li>
+          <li>Optional structured answers (e.g. “Would you buy again?”)</li>
           <li>Optional photos (uploaded to Cloudinary)</li>
           <li>The date and time of submission (stored automatically)</li>
         </ul>

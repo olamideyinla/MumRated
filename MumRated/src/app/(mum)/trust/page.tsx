@@ -60,23 +60,23 @@ export default function TrustPage() {
           1. Who can write a review?
         </h2>
         <p className="text-dark leading-relaxed">
-          Any Nigerian mum (or carer) who has actually used a product or service. That&rsquo;s it.
+          Any Nigerian mum (or carer) who has actually used a product or service. That’s it.
           You need to create a free account, we ask for an email address so we can contact you
-          if there&rsquo;s a problem with your review.
+          if there’s a problem with your review.
         </p>
         <p className="text-dark leading-relaxed">
-          We ask for your child&rsquo;s age band and your city (optional) because those details
+          We ask for your child’s age band and your city (optional) because those details
           help other mums understand the context of your experience. A crèche review from
-          a Lekki mum with a toddler is more useful than a nameless &ldquo;it was nice.&rdquo;
+          a Lekki mum with a toddler is more useful than a nameless “it was nice.”
         </p>
         <p className="text-dark leading-relaxed">
-          You can choose to post anonymously if you&rsquo;d prefer, your name won&rsquo;t appear,
+          You can choose to post anonymously if you’d prefer, your name won’t appear,
           but your account still exists behind the scenes. We do this because some sensitive
-          reviews (medical, school-related) might affect a mum&rsquo;s relationship with a provider
+          reviews (medical, school-related) might affect a mum’s relationship with a provider
           if they were easily traced.
         </p>
         <div className="rounded-card bg-bgLight border border-border px-4 py-3 text-sm text-dark">
-          <strong>One review per listing, per mum.</strong> We don&rsquo;t allow the same person
+          <strong>One review per listing, per mum.</strong> We don’t allow the same person
           to write multiple reviews for the same product or service, not even from different accounts.
         </div>
       </section>
@@ -87,14 +87,14 @@ export default function TrustPage() {
           2. How moderation works
         </h2>
         <p className="text-dark leading-relaxed">
-          Every review goes through an automated screening when it&rsquo;s submitted. We check
+          Every review goes through an automated screening when it’s submitted. We check
           for patterns that suggest fake reviews, spam, medical misinformation, or content that
           would embarrass your mother (and ours). Most genuine reviews pass instantly.
         </p>
         <p className="text-dark leading-relaxed">
-          Reviews that trigger a flag are held in a &ldquo;pending review&rdquo; state, they
-          remain visible while the MumRated! team reads them. If a review is fine, it&rsquo;s
-          cleared. If it breaks the rules below, it&rsquo;s removed.
+          Reviews that trigger a flag are held in a “pending review” state, they
+          remain visible while the MumRated! team reads them. If a review is fine, it’s
+          cleared. If it breaks the rules below, it’s removed.
         </p>
         <p className="text-dark leading-relaxed">
           We also allow other mums to flag reviews they think are unfair or fake. Every flag
@@ -127,7 +127,7 @@ export default function TrustPage() {
         </ul>
         <p className="text-muted text-sm">
           A negative review is not a reason to remove a review. A business complaining about
-          a review is not a reason to remove a review. We exist to protect mums&rsquo; right
+          a review is not a reason to remove a review. We exist to protect mums’ right
           to share genuine experiences.
         </p>
       </section>
@@ -138,7 +138,7 @@ export default function TrustPage() {
           4. How listings work
         </h2>
         <p className="text-dark leading-relaxed">
-          Any product or service a mum wants to review can appear on MumRated!, we don&rsquo;t
+          Any product or service a mum wants to review can appear on MumRated!, we don’t
           require businesses to sign up or pay anything. Mums suggest listings; our team
           adds them within 48 hours.
         </p>
@@ -149,18 +149,18 @@ export default function TrustPage() {
         </p>
         <div className="rounded-card bg-bgLight border border-border px-4 py-3 text-sm text-dark">
           No business has ever paid to appear higher on MumRated!, and no business ever will.
-          See the &ldquo;What we will never sell&rdquo; section below.
+          See the “What we will never sell” section below.
         </div>
       </section>
 
       {/* ── Section 5: What claiming means ──────────────────── */}
       <section className="space-y-3">
         <h2 className="font-display text-xl font-bold text-dark">
-          5. What &ldquo;Verified&rdquo; means, and what it doesn&rsquo;t
+          5. What “Verified” means, and what it doesn’t
         </h2>
         <p className="text-dark leading-relaxed">
-          Businesses can pay a small annual fee to &ldquo;claim&rdquo; their listing on MumRated!
-          When a listing is claimed, you&rsquo;ll see a small{" "}
+          Businesses can pay a small annual fee to “claim” their listing on MumRated!
+          When a listing is claimed, you’ll see a small{" "}
           <span className="inline-flex items-center gap-1 rounded-pill bg-verified px-2 py-0.5 text-[10px] font-bold text-white">
             ✓ Verified
           </span>{" "}
@@ -174,12 +174,12 @@ export default function TrustPage() {
           <li>That we endorse the business or its products</li>
           <li>That we have inspected the premises or tested the products</li>
           <li>That the business gets any kind of ranking advantage</li>
-          <li>That negative reviews will be removed at the business&rsquo;s request</li>
+          <li>That negative reviews will be removed at the business’s request</li>
         </ul>
         <p className="text-dark leading-relaxed">
-          Claimed businesses can respond to reviews, you&rsquo;ll see their replies clearly
-          labelled &ldquo;Provider response&rdquo; below the original review. Providers cannot
-          edit reviews. They cannot delete reviews. Only MumRated!&rsquo;s moderation team can
+          Claimed businesses can respond to reviews, you’ll see their replies clearly
+          labelled “Provider response” below the original review. Providers cannot
+          edit reviews. They cannot delete reviews. Only MumRated!’s moderation team can
           do that.
         </p>
       </section>

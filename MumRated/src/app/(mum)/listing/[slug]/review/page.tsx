@@ -81,10 +81,10 @@ export default async function ReviewPage({ params }: Props) {
       {existingReview ? (
         <div className="rounded-card border border-border bg-bgLight px-6 py-8 text-center space-y-3">
           <p className="text-2xl" aria-hidden="true">✍️</p>
-          <p className="font-semibold text-dark">You&rsquo;ve already reviewed this</p>
+          <p className="font-semibold text-dark">You’ve already reviewed this</p>
           <p className="text-sm text-muted">
             Each mum can review a listing once to keep things fair. If your
-            experience has changed, contact us and we&rsquo;ll update it together.
+            experience has changed, contact us and we’ll update it together.
           </p>
           <Link href={`/listing/${params.slug}`} className="btn-outline text-sm py-2 px-5">
             Back to listing

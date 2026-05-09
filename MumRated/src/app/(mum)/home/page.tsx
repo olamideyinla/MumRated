@@ -89,7 +89,7 @@ export default async function HomePage() {
             Real reviews from real Nigerian mums
           </h1>
           <p className="text-white/80 text-lg mb-8 leading-relaxed">
-            No ads. No sponsored results. Just honest takes from mums who&rsquo;ve been there.
+            No ads. No sponsored results. Just honest takes from mums who’ve been there.
           </p>
           <form role="search" action="/search" method="GET" className="flex max-w-lg mx-auto">
             <label htmlFor="hero-search" className="sr-only">Search products and services</label>
@@ -224,7 +224,7 @@ export default async function HomePage() {
                     </div>
 
                     <p className="text-sm text-dark line-clamp-3 leading-relaxed">
-                      &ldquo;{review.text}&rdquo;
+                      “{review.text}”
                     </p>
 
                     <p className="text-xs text-muted self-end">{formatRelativeDate(review.createdAt)}</p>
@@ -241,7 +241,7 @@ export default async function HomePage() {
         <div className="container max-w-xl text-center space-y-4">
           <p className="text-2xl" aria-hidden="true">💡</p>
           <h2 className="font-display text-xl font-bold text-dark">
-            Can&rsquo;t find something?
+            Can’t find something?
           </h2>
           <p className="text-muted text-sm leading-relaxed">
             Suggest a product or service. Community submissions are added within 48 hours.

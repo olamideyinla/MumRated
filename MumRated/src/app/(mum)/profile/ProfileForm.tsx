@@ -253,7 +253,7 @@ export default function ProfileForm({ user }: { user: UserProfile }) {
       {/* ── Child's age band ── */}
       <div>
         <label className="label" htmlFor="childAgeBand">
-          My child&rsquo;s age
+          My child’s age
         </label>
         <select
           id="childAgeBand"

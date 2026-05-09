@@ -57,14 +57,14 @@ export async function POST(req: Request) {
           <tr>
             <td style="padding:36px 40px 32px;">
               <p style="margin:0 0 16px;font-size:22px;font-weight:800;color:#3B2010;line-height:1.3;">
-                You&rsquo;re part of the movement. ✓
+                You’re part of the movement. ✓
               </p>
               <p style="margin:0 0 14px;font-size:15px;color:#7A5040;line-height:1.75;">
-                Thank you for joining MumRated! We&rsquo;re building Nigeria&rsquo;s most trusted review platform
+                Thank you for joining MumRated! We’re building Nigeria’s most trusted review platform
                 for mums — honest, searchable, and mum-led from top to bottom.
               </p>
               <p style="margin:0 0 28px;font-size:15px;color:#7A5040;line-height:1.75;">
-                You&rsquo;ll hear from us as we grow. In the meantime, you can browse reviews, explore
+                You’ll hear from us as we grow. In the meantime, you can browse reviews, explore
                 categories, or write your own review right now.
               </p>
 

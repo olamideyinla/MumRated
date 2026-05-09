@@ -58,7 +58,7 @@ export default function TermsPage() {
       <section className="space-y-4 text-dark leading-relaxed">
         <h2 className="font-display text-xl font-bold">1. Who we are</h2>
         <p>
-          MumRated! (&ldquo;MumRated!&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) is a consumer
+          MumRated! (“MumRated!”, “we”, “us”) is a consumer
           review platform operated in Nigeria. By using our website at mumrated.com and any
           associated applications, you agree to these Terms of Use.
         </p>
@@ -103,7 +103,7 @@ export default function TermsPage() {
       <section className="space-y-4 text-dark leading-relaxed">
         <h2 className="font-display text-xl font-bold">5. Provider accounts</h2>
         <p>
-          Businesses may pay to claim a listing. Claimed listings receive a &ldquo;Verified&rdquo;
+          Businesses may pay to claim a listing. Claimed listings receive a “Verified”
           badge (identity verification only) and the ability to respond to reviews. Claiming a
           listing does not affect its ranking in search results or category pages. Subscription
           fees are non-refundable. [COUNSEL: add full payment and cancellation terms here.]

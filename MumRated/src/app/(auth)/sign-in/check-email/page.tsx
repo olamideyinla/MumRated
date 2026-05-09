@@ -16,11 +16,11 @@ export default function CheckEmailPage() {
             Magic link sent
           </h1>
           <p className="text-sm text-muted leading-relaxed">
-            Check your inbox and click the link we sent you. It&rsquo;ll sign
+            Check your inbox and click the link we sent you. It’ll sign
             you straight in, no password needed. It expires in 10 minutes.
           </p>
           <p className="text-xs text-muted mt-2">
-            Can&rsquo;t find it? Check your spam folder.
+            Can’t find it? Check your spam folder.
           </p>
         </div>
 

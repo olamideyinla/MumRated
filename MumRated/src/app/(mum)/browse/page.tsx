@@ -142,7 +142,7 @@ export default async function BrowsePage() {
       {/* Suggest CTA */}
       <div className="mt-12 rounded-card border border-border bg-bgLight px-6 py-5 text-center">
         <p className="text-sm text-muted mb-2">
-          Don&rsquo;t see the category you need?
+          Don’t see the category you need?
         </p>
         <Link href="/suggest" className="btn-outline text-sm py-2 px-5">
           Suggest a listing

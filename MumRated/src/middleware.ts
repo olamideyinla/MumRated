@@ -15,9 +15,12 @@ export default auth((req) => {
   );
 
   if (needsAuth && !req.auth) {
-    // Preserve the destination so we can redirect back after sign-in
+    // Preserve the destination so we can redirect back after sign-in.
+    // Pass an absolute callbackUrl so Auth.js v5 open-redirect validation
+    // accepts it cleanly regardless of which beta version is running.
     const url = new URL("/sign-in", req.url);
-    url.searchParams.set("callbackUrl", pathname);
+    const origin = process.env.AUTH_URL ?? req.nextUrl.origin;
+    url.searchParams.set("callbackUrl", `${origin}${pathname}`);
     return NextResponse.redirect(url);
   }
 

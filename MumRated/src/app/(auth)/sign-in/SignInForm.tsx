@@ -15,6 +15,8 @@ export default function SignInForm() {
   const [emailError, setEmailError] = useState("");
   const [isPending, startTransition] = useTransition();
 
+  const isExpiredLink = errorCode === "Verification";
+
   const errorMessages: Record<string, string> = {
     OAuthAccountNotLinked:
       "That email is already linked to a different sign-in method. Try Google, or send yourself a magic link.",
@@ -81,7 +83,22 @@ export default function SignInForm() {
             </p>
           </div>
 
-          {errorMessage && (
+          {isExpiredLink && (
+            <div
+              role="alert"
+              className="rounded-card bg-amber-50 border border-amber-300 px-4 py-3 space-y-1"
+            >
+              <p className="text-sm font-semibold text-amber-900">
+                That link has expired
+              </p>
+              <p className="text-xs text-amber-800">
+                Magic links are single-use and expire after 10 minutes. Enter
+                your email below to get a new one.
+              </p>
+            </div>
+          )}
+
+          {errorMessage && !isExpiredLink && (
             <div
               role="alert"
               className="rounded-card bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700"

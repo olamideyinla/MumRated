@@ -4,6 +4,9 @@ import Resend from "next-auth/providers/resend";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "@/lib/db";
 
+// ── Auth debug prefix (visible in Vercel Function logs) ──────────────────
+const TAG = "[auth]";
+
 // ── Helper: derive isVerified from profile completeness ──────────────────
 function computeIsVerified(user: {
   displayName?: string | null;
@@ -27,7 +30,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
 
-  // JWT strategy keeps sessions lightweight
+  // Database sessions — session token stored in Session table, not JWT
   session: { strategy: "database" },
 
   pages: {
@@ -36,9 +39,31 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     error: "/sign-in",
   },
 
+  // ── Auth.js internal error / warning logger ────────────────────────────
+  // Surfaces token verification failures, adapter errors, and config issues
+  // in Vercel Function logs. Remove or gate behind NODE_ENV in production
+  // once the magic-link flow is confirmed stable.
+  logger: {
+    error(error) {
+      console.error(`${TAG} error`, error);
+    },
+    warn(code) {
+      console.warn(`${TAG} warn`, code);
+    },
+    debug(message, metadata) {
+      if (process.env.NODE_ENV !== "production") {
+        console.log(`${TAG} debug`, message, metadata);
+      }
+    },
+  },
+
   callbacks: {
-    // Sync Google profile data into our custom fields on every sign-in
+    // ── signIn ─────────────────────────────────────────────────────────────
     async signIn({ user, account, profile }) {
+      console.log(
+        `${TAG} signIn provider=${account?.provider ?? "unknown"} userId=${user?.id ?? "none"}`
+      );
+
       if (account?.provider === "google" && profile && user.id) {
         const existing = await db.user.findUnique({
           where: { id: user.id },
@@ -65,10 +90,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           await db.user.update({ where: { id: user.id }, data: updates });
         }
       }
+
+      console.log(`${TAG} signIn → allowed`);
       return true;
     },
 
-    // Expose id, role and isVerified in the session
+    // ── session ────────────────────────────────────────────────────────────
     async session({ session, user }) {
       if (session.user && user?.id) {
         // Always set id — this is the critical guard for protected pages
@@ -91,9 +118,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             // Prefer our custom displayName/photo over Auth.js defaults
             if (dbUser.displayName) session.user.name = dbUser.displayName;
             if (dbUser.photo) session.user.image = dbUser.photo;
+          } else {
+            console.warn(`${TAG} session: no DB row for userId=${user.id}`);
           }
-        } catch {
+        } catch (err) {
           // DB enrichment failed — session still works with basic id
+          console.error(`${TAG} session enrichment failed for userId=${user.id}`, err);
         }
       }
       return session;

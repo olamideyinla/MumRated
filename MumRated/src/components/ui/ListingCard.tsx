@@ -19,7 +19,7 @@ interface Props {
 }
 
 export default function ListingCard({ listing }: Props) {
-  const { slug, name, type, brandOrProvider, heroImage, locationText, priceRangeNGN, claimStatus, stats, category } = listing;
+  const { slug, name, brandOrProvider, heroImage, locationText, priceRangeNGN, claimStatus, stats, category } = listing;
   const avgRating = stats?.avgRating ?? 0;
   const reviewCount = stats?.reviewCount ?? 0;
 

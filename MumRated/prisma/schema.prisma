@@ -427,3 +427,19 @@ model WaitlistEntry {
 
   @@index([createdAt(sort: Desc)])
 }
+
+// ══════════════════════════════════════════════════════════════════════════
+// LISTING SUGGESTION — community-submitted listing requests
+// ══════════════════════════════════════════════════════════════════════════
+
+model ListingSuggestion {
+  id             String      @id @default(cuid())
+  name           String
+  type           ListingType
+  categoryHint   String?
+  description    String?
+  submitterEmail String?
+  createdAt      DateTime    @default(now())
+
+  @@index([createdAt(sort: Desc)])
+}

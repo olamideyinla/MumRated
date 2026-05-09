@@ -256,7 +256,7 @@ export default function LandingPage() {
       <section id="categories" className={s.section} style={{ background: "var(--bgL)" }}>
         <div className={s.container}>
           <div className={s.reveal} style={{ textAlign: "center", marginBottom: 36 }}>
-            <div className={s.label}>8 categories</div>
+            <div className={s.label}>Categories</div>
             <h2 className={s.secTitle}>Everything a mum needs</h2>
           </div>
           <div className={`${s.catsGrid} ${s.reveal}`}>

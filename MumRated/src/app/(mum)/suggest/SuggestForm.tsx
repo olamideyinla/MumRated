@@ -156,7 +156,7 @@ export default function SuggestForm() {
       <div>
         <label htmlFor="suggest-email" className="label">
           Your email{" "}
-          <span className="font-normal text-muted">(optional — we'll notify you when it's added)</span>
+          <span className="font-normal text-muted">(optional &mdash; we&apos;ll notify you when it&apos;s added)</span>
         </label>
         <input
           id="suggest-email"
